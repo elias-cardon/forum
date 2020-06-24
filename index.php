@@ -35,7 +35,7 @@ if (isset($_POST["deconnexion"])) {
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
 
-        $sql = 'SELECT id, titre, date_heure FROM topics ORDER BY date_heure DESC';
+        $sql = 'SELECT * FROM topics ORDER BY date_heure DESC';
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
 
