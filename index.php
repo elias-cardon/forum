@@ -1,4 +1,4 @@
-<!-- [ russian roulette is not the same without a gun ] -->
+<!-- Negotium est negotium -->
 <?php session_start();
 
 if (isset($_POST["deconnexion"])) {
