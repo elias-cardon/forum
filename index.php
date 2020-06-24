@@ -58,17 +58,17 @@ if (isset($_POST["deconnexion"])) {
                     </td>
                 </tr>
                 <?php
-                while ($data = mysql_fetch_array($req)) {
+                while ($data = mysqli_fetch_array($req)) {
 
-                    sscanf($data['date_derniere_reponse'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                    sscanf($data['date_heure'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 
                     echo '<tr>';
                     echo '<td>';
 
-                    echo htmlentities(trim($data['auteur']));
+                    echo htmlentities(trim($data['login']));
                     echo '</td><td>';
 
-                    echo '<a href="./lire_sujet.php?id_sujet_a_lire=', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="topic.php', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
