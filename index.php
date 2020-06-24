@@ -17,7 +17,7 @@ if (isset($_POST["deconnexion"])) {
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="src/css/index.css">
 </head>
 
 <body>
