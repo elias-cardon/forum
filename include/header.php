@@ -1,6 +1,6 @@
-<nav id="nav-index">
+    <nav id="nav-index">
         <div id="top-title">
-            <a href="index.php"><h3>RESERVATION SALLES</h3></a>
+            <a href="index.php"><h3>Call of simulation</h3></a>
         </div>
         <?php 
           if(!isset($_SESSION['login'])){
@@ -28,3 +28,4 @@ if (isset($_SESSION['login'])) {
 }
 ?>
 </nav>
+
