@@ -28,7 +28,7 @@ if (isset($_POST["deconnexion"])) {
     <div id="banner">
         <h2>BIENVENUE</h2>
 
-        <a href="./insert_sujet.php">Insérer un sujet</a>
+        <a href="topic.php">Insérer un sujet</a>
 
 <br /><br />
 
