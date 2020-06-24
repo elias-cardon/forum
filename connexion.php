@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (isset($_POST['submit'])) {
-    $login = $_POST['login'];
-    $password = $_POST['password'];
+    $login = htmlspecialchars($_POST['login']);
+    $password = htmlspecialchars($_POST['password']);
     if ($login && $password) {
         $db = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($db, 'reservationsalles');
