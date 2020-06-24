@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     if ($login && $password && $repeatpassword) {
         if ($password == $repeatpassword) {
             $db = mysqli_connect('localhost', 'root', '') or die('Erreur');
-            mysqli_select_db($db, 'reservationsalles');
+            mysqli_select_db($db, 'forum');
 
             $query = mysqli_query($db, "INSERT INTO utilisateurs (login, password) VALUES('$login', '$password');");
 

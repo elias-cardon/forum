@@ -5,7 +5,7 @@ if (isset($_POST['submit'])) {
     $password = htmlspecialchars($_POST['password']);
     if ($login && $password) {
         $db = mysqli_connect('localhost', 'root', '');
-        mysqli_select_db($db, 'reservationsalles');
+        mysqli_select_db($db, 'forum');
 
         $query = mysqli_query($db, "SELECT * FROM utilisateurs WHERE login='$login' && password='$password'");
         $rows = mysqli_num_rows($query);
