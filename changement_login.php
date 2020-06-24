@@ -9,7 +9,7 @@ if (isset($_SESSION['login'])) {
         if ($login && $newlogin && $repeatnewlogin) {
             if ($newlogin == $repeatnewlogin) {
                 $db = mysqli_connect('localhost', 'root', '') or die('Erreur');
-                mysqli_select_db($db, 'reservationsalles');
+                mysqli_select_db($db, 'forum');
                 $query = mysqli_query($db, "SELECT * FROM utilisateurs WHERE login = '$username' AND login = '$login'");
                 $rows = mysqli_num_rows($query);
                 if ($rows == 1) {
