@@ -1,6 +1,8 @@
+<script src="https://kit.fontawesome.com/68a550b660.js" crossorigin="anonymous"></script>
+    
     <nav id="nav-index">
         <div id="top-title">
-            <a href="index.php"><h3>Le Bon Game</h3></a>
+            <a href="index.php"><h3>Le Bon Game</h3></a><i class="fas fa-gamepad"></i>
         </div>
         <?php 
           if(!isset($_SESSION['login'])){
