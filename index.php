@@ -80,7 +80,8 @@ if (isset($_POST["deconnexion"])) {
         mysqli_free_result($req);
         ?>
     </div>
-
+    
+</body>
 </main>
 <footer>
     <?php include("include/footer.php") ?>
