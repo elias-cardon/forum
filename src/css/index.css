@@ -109,11 +109,13 @@ h4 {
     max-width: 100%;
     flex-direction: column;
 }
+#form-add-topics label{
+    padding-top:30px;
+}
 input {
 border: none;
 outline: none;
 width: 300px;
-height: 30px;
 margin: 2px;
 padding: 5px;
 font-size: 15px;
