@@ -8,7 +8,7 @@
 }
 
 html{
-    background-color: #ffa8B6;
+    background-color:  #a28089;
 }
 /*****HEADER****/
 
@@ -35,7 +35,7 @@ header {
 }
 #top-title h3{
 
-        color:#9df9ef;
+        color:#edf7F6;
 }
 .form{
     z-index: 1000000;
@@ -43,7 +43,7 @@ header {
 #banner{
     display: flex;
     flex-direction: column;
-    background-color:  #ffa8B6;
+    background-color:   #a28089;
 }
 .btn {
     list-style: none;
@@ -61,7 +61,7 @@ header {
 }
 
 .btn a {
-    color: #9df9ef;
+    color: #edf7F6;
     transition: 0.3s;
 }
 
@@ -118,7 +118,7 @@ input {
 i {
 
     text-align: center;
-    color: #9df9ef;
+    color: #edf7F6;
     cursor: pointer;
     font-size: 33px;
     margin: 4px;
