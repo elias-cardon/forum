@@ -1,4 +1,3 @@
-<!-- Negotium est negotium -->
 <?php session_start();
 
 if (isset($_POST["deconnexion"])) {
@@ -26,16 +25,61 @@ if (isset($_POST["deconnexion"])) {
 </header>
 <main>
     <div id="banner">
-        <h2>BIENVENUE</h2>
+        <h2>BIENVENUE SUR LE FORUM</h2>
 
-        <h4> Trouvez la salle idéal pour vos évènements !</h4>
+        <a href="topic.php">Insérer un sujet</a>
 
+        <br/><br/>
 
-        <form method="post" action="">
-            <input class="recherche" type="search" name="search" placeholder="Nom de l'évènement mariage, anniversaire">
-            <input class="recherche" type="search" name="search" placeholder="Où Paris, Marseille">
-            <i class="fas fa-search"></i>
-        </form>
+        <?php
+        $bdd = mysqli_connect('localhost', 'root', '');
+        mysqli_select_db($bdd, 'forum');
+
+        $sql = 'SELECT * FROM topics ORDER BY date_heure DESC';
+
+        $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
+
+        $nb_sujets = mysqli_num_rows($req);
+
+        if ($nb_sujets == 0) {
+            echo 'Aucun sujet';
+        } else {
+            ?>
+            <div class="table-center">
+            <table width="500" border="1">
+                <tr>
+                    <td>
+                        Auteur
+                    </td>
+                    <td>
+                        Titre du sujet
+                    </td>
+                    <td>
+                        Date dernière réponse
+                    </td>
+                </tr>
+                <?php
+                while ($data = mysqli_fetch_array($req)) {
+
+                    sscanf($data['date_heure'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+
+                    echo '<tr>';
+                    echo '<td>';
+
+                    echo htmlentities(trim($data['login']));
+                    echo '</td><td>';
+
+                    echo '<a href="topic.php', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
+
+                    echo '</td><td>';
+                    echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+                }
+                ?>
+                </td></tr></table></div>
+            <?php
+        }
+        mysqli_free_result($req);
+        ?>
     </div>
 
 </main>

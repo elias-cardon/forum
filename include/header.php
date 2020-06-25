@@ -1,4 +1,4 @@
-<nav id="nav-index">
+    <nav id="nav-index">
         <div id="top-title">
             <a href="index.php"><h3>SOLUCERUM</h3></a>
         </div>
@@ -28,3 +28,4 @@ if (isset($_SESSION['login'])) {
 }
 ?>
 </nav>
+
