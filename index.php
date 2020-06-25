@@ -54,7 +54,7 @@ if (isset($_POST["deconnexion"])) {
                         Titre du sujet
                     </td>
                     <td>
-                        Date dernière réponse
+                        Date de création
                     </td>
                 </tr>
                 <?php
