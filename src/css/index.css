@@ -7,6 +7,22 @@
     text-decoration: none;
 }
 
+html{
+    background-color:  #a28089;
+}
+
+#banner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+main{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 /*****HEADER****/
 
 header {
@@ -15,7 +31,7 @@ header {
     justify-content: space-evenly;
     width: 100%;
     height: 20vh;
-    background-color: rgb(28, 96, 98);
+    background-color: #51e2f5;
 
 }
 
@@ -23,20 +39,26 @@ header {
 
     display: flex;
     justify-content: space-evenly;
-    width: 50%;
+    align-items: center;
+    width: 30%;
     height: 30%;
     font-size: 30px;
     margin-left: 20px;
 
 }
+#top-title h3{
 
+        color:#edf7F6;
+}
+.form{
+    z-index: 1000000;
+}
 .btn {
     list-style: none;
-    color: white;
     cursor: pointer;
     font-weight: bold;
+    text-align: center;
     margin: 7px;
-    background-color: rgba(179, 186, 189, 1);
     border-radius: 4px;
     width: 100px;
     margin-top: 10px;
@@ -47,13 +69,13 @@ header {
 }
 
 .btn a {
-    color: white;
+    color: #edf7F6;
+    transition: 0.3s;
 }
 
-.btn:hover {
-    color: white;
+.btn a:hover {
+    color:  #ffa8B6;
     box-shadow: 0 0 20px (112, 103, 100, 0.6);
-    background-color: rgb(20, 66, 68);
 }
 
 .menu-nav {
@@ -62,21 +84,12 @@ header {
 
 /*****INDEX****/
 
-#banner {
-    position: absolute;
-    height: 40%;
-    width: 100%;
-    background-color: rgb(245, 140, 222);
-}
-
 h2 {
     display: flex;
     justify-content: center;
     margin-top: 15px;
     font-size: 60px;
-    color: rgb(28, 96, 98);
-
-
+    color: #9df9ef;
 }
 
 h4 {
@@ -88,57 +101,58 @@ h4 {
     color: white;
 
 }
-
+#form-add-topics{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    margin:50px;
+    max-width: 100%;
+    flex-direction: column;
+}
+#form-add-topics label{
+    padding-top:30px;
+}
 input {
-
-    border: none;
-    outline: none;
-    width: 300px;
-    height: 50px;
-    margin: 2px;
-    padding: 5px;
-    font-size: 15px;
-    border: 3px solid rgb(177, 122, 165);
-
+border: none;
+outline: none;
+width: 300px;
+margin: 2px;
+padding: 5px;
+font-size: 15px;
+border: 3px solid rgb(177, 122, 165);
+width: 25rem;
+border-radius: 1rem;
 }
 
+input[type=submit]{
+    width: 20%;
+}
 i {
 
     text-align: center;
-    color: rgb(177, 122, 165);
+    color: #edf7F6;
     cursor: pointer;
     font-size: 33px;
     margin: 4px;
+    transition: 0.3s;
 
 }
 
 i:hover {
 
-    color: rgb(28, 96, 98);
+    color: #ffa8B6;
 
 }
 
 /****FOOTER***/
-
-#footer-container {
-
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    height: 18vh;
-    background-color: rgba(180, 180, 180, 0.692);
-
-}
-
-#icone {
-
+footer{
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
-    margin: auto;
-    margin-top: 60px;
+    height: 18vh;
+    background-color:#51e2f5;
 
 }
-
 @media screen and (min-width: 1200px) {
     form {
         display: flex;
@@ -155,8 +169,6 @@ i:hover {
     }
 
     h3 {
-
-        color: azure;
         font-size: 45px;
         cursor: pointer;
 
@@ -263,7 +275,6 @@ i:hover {
         justify-content: center;
         margin-top: 15px;
         font-size: 35px;
-        color: rgb(28, 96, 98);
 
 
     }
