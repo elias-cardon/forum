@@ -10,14 +10,17 @@
 html{
     background-color:  #a28089;
 }
-main{
-    min-height: 100vh;
-}
 
 #banner{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+main{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 /*****HEADER****/
@@ -86,9 +89,7 @@ h2 {
     justify-content: center;
     margin-top: 15px;
     font-size: 60px;
-    color:  #9df9ef;
-
-
+    color: #9df9ef;
 }
 
 h4 {
@@ -100,20 +101,30 @@ h4 {
     color: white;
 
 }
-
+#form-add-topics{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    margin:50px;
+    max-width: 100%;
+    flex-direction: column;
+}
 input {
-
-    border: none;
-    outline: none;
-    width: 300px;
-    height: 50px;
-    margin: 2px;
-    padding: 5px;
-    font-size: 15px;
-    border: 3px solid rgb(177, 122, 165);
-
+border: none;
+outline: none;
+width: 300px;
+height: 30px;
+margin: 2px;
+padding: 5px;
+font-size: 15px;
+border: 3px solid rgb(177, 122, 165);
+width: 25rem;
+border-radius: 1rem;
 }
 
+input[type=submit]{
+    width: 20%;
+}
 i {
 
     text-align: center;
@@ -132,23 +143,12 @@ i:hover {
 }
 
 /****FOOTER***/
-
-#footer-container {
-
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    height: 18vh;
-    background-color: 	#51e2f5;
-
-}
-
-#icone {
-
+footer{
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
-    margin: auto;
-    margin-top: 60px;
+    height: 18vh;
+    background-color:#51e2f5;
 
 }
 @media screen and (min-width: 1200px) {

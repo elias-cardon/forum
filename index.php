@@ -77,9 +77,15 @@ if (isset($_POST["deconnexion"])) {
         }
         mysqli_free_result($req);
         ?>
+        
     </div>
-    
-</body>
+    <form id="form-add-topics" action="#" method="post">
+
+<label for="titre">Titre:</label><br />
+<input type="text" name="titre">
+
+<input type="submit" name="submit" value="Réserver">
+</form>
 </main>
 <footer>
     <?php include("include/footer.php") ?>
