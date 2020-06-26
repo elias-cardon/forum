@@ -91,7 +91,22 @@ if (isset($_POST["deconnexion"])) {
 
         if(!empty($titre)){
 
+            //connexion à la bdd
+            try {
+                $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+            }catch(PDOException $e){
+                echo 'Erreur : ' . $e->getMessage();
+            }
+            $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC');
+            $prepare->execute([$_SESSION['login']]);
+            $user = $prepare->fetch(PDO::FETCH_ASSOC);
+            //inserer dans bdd  
+            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure)
+                                    VALUES(:id_utilisateurs, :titre, CURTIME())");
+            $insert->execute(array('id_utilisateurs' => (int)$user['id'], 
+                                'titre' => $titre));
 
+            header("location:index.php");
 
         }else echo "Veuillez saisir un titre.";
     }
