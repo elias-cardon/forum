@@ -15,7 +15,7 @@ if (isset($_POST["deconnexion"])) {
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="src/css/categorie.css">
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
 </head>
 <body>
 <header>
@@ -23,7 +23,7 @@ if (isset($_POST["deconnexion"])) {
 </header>
 <main>
 	<?php
-if (!isset($_GET['id_topic'])) {
+if (!isset($_GET['id_topics'])) {
 	echo 'Sujet non défini.';
 }
 else {
