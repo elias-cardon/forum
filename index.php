@@ -35,7 +35,7 @@ if (isset($_POST["deconnexion"])) {
 
         $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
 
-        $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
+        $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
         $nb_sujets = mysqli_num_rows($req);
 
