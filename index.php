@@ -47,15 +47,15 @@ if (isset($_POST["deconnexion"])) {
             ?>
             <table width="500" border="1">
                 <tr>
-                    <td>
+                    <th>
                         Auteur
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Titre du sujet
-                    </td>
-                    <td>
-                        Date de création
-                    </td>
+                    </th>
+                    <th>
+                        Date dernière réponse
+                    </th>
                 </tr>
                 <?php
                 while ($data = mysqli_fetch_array($req)) {
