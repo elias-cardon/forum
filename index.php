@@ -79,13 +79,33 @@ if (isset($_POST["deconnexion"])) {
         ?>
         
     </div>
-    <form id="form-add-topics" action="#" method="post">
+
+    <?php
+
+    if(isset($_SESSION['login'])){
+
+    if(isset($_POST['submit'])){
+
+        //SECURE TITRE
+        $titre = htmlspecialchars($_POST['titre']);
+
+        if(!empty($titre)){
+
+
+
+        }else echo "Veuillez saisir un titre.";
+    }
+    ?>
+<form id="form-add-topics" action="#" method="post">
 
 <label for="titre">Titre:</label><br />
 <input type="text" name="titre">
 
-<input type="submit" name="submit" value="Réserver">
+<input type="submit" name="submit" value="Ajouter">
 </form>
+   <?php } ?>
+
+
 </main>
 <footer>
     <?php include("include/footer.php") ?>
