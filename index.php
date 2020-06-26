@@ -27,15 +27,13 @@ if (isset($_POST["deconnexion"])) {
     <div id="banner">
         <h2>BIENVENUE</h2>
 
-        <a href="topic.php">Insérer un sujet</a>
-
         <br/><br/>
 
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
 
-        $sql = 'SELECT * FROM topics ORDER BY date_heure DESC';
+        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
 
@@ -68,7 +66,7 @@ if (isset($_POST["deconnexion"])) {
                     echo htmlentities(trim($data['login']));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topic=', $data['login'], '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="#', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
@@ -79,8 +77,15 @@ if (isset($_POST["deconnexion"])) {
         }
         mysqli_free_result($req);
         ?>
+        
     </div>
+    <form id="form-add-topics" action="#" method="post">
 
+<label for="titre">Titre:</label><br />
+<input type="text" name="titre">
+
+<input type="submit" name="submit" value="Réserver">
+</form>
 </main>
 <footer>
     <?php include("include/footer.php") ?>
