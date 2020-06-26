@@ -26,8 +26,8 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="utf-8">
     <title>Connexion</title>
-    <link rel="stylesheet" type="text/css" href="css/connexion.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="src/css/connexion.css">
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
 </head>
 <body class="color">
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         <input class="input" type="text" name="login">
         <p>Mot de passe</p>
         <input class="input" type="password" name="password"><br/><br/>
-        <input class="input" type="submit" name="submit" value="Valider"><br/>
+        <input class="input" id="connexionSubmit" type="submit" name="submit" value="Valider"><br/>
     </form>
 </main>
 </body>

@@ -28,8 +28,8 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="utf-8">
     <title>Inscription</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/inscription.css">
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
+    <link rel="stylesheet" type="text/css" href="src/css/inscription.css">
 </head>
 <body class="color">
 <!-- Header -->
