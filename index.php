@@ -79,13 +79,48 @@ if (isset($_POST["deconnexion"])) {
         ?>
         
     </div>
-    <form id="form-add-topics" action="#" method="post">
+
+    <?php
+
+    if(isset($_SESSION['login'])){
+
+    if(isset($_POST['submit'])){
+
+        //SECURE TITRE
+        $titre = htmlspecialchars($_POST['titre']);
+
+        if(!empty($titre)){
+
+            //connexion à la bdd
+            try {
+                $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+            }catch(PDOException $e){
+                echo 'Erreur : ' . $e->getMessage();
+            }
+            $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC');
+            $prepare->execute([$_SESSION['login']]);
+            $user = $prepare->fetch(PDO::FETCH_ASSOC);
+            //inserer dans bdd  
+            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure)
+                                    VALUES(:id_utilisateurs, :titre, CURTIME())");
+            $insert->execute(array('id_utilisateurs' => (int)$user['id'], 
+                                'titre' => $titre));
+
+            header("location:index.php");
+
+        }else echo "Veuillez saisir un titre.";
+    }
+    ?>
+<form id="form-add-topics" action="#" method="post">
 
 <label for="titre">Titre:</label><br />
 <input type="text" name="titre">
 
-<input type="submit" name="submit" value="Réserver">
+<input type="submit" name="submit" value="Ajouter">
 </form>
+   <?php } ?>
+
+
 </main>
 <footer>
     <?php include("include/footer.php") ?>
