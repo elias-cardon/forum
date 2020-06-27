@@ -60,6 +60,9 @@ header {
     display: flex;
     justify-content: center;
 }
+.center_pProfil{
+    text-align: center;
+}
 .btn {
     list-style: none;
     cursor: pointer;
