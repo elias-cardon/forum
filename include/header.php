@@ -20,6 +20,9 @@ if (isset($_SESSION['login'])) {
     
     <div class="btn_center">
     <ul class="menu-nav">
+    <?php if($pageSelected == 'profil'){?>
+        <li class="btn"><a href="index.php">ACCUEIL</a></li>
+    <?php } ?>
         <li class="btn"><a href="profil.php">PROFIL</a></li>
         <li class="btn"><a href="logout.php">DECONNEXION</a></li>
     </ul> 
