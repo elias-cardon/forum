@@ -153,6 +153,7 @@ table {
 }
 table td,th{
     padding: 10px;
+    background-color: #edf7F6;
 }
 table th{
     background-color: #51E2F5;
