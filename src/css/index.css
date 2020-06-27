@@ -8,7 +8,6 @@
 }
 
 html{
-    background-color:  #a28089;
 }
 
 main{
@@ -110,6 +109,8 @@ h4 {
     margin:50px;
     max-width: 100%;
     flex-direction: column;
+    background-color: #51e2f5;
+    border-radius: 10px;
 }
 #form-add-topics label{
     padding-top:30px;
@@ -129,6 +130,7 @@ border-radius: 1rem;
 input[type=submit]{
     width: 20%;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 i {
 
