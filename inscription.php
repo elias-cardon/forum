@@ -1,4 +1,5 @@
 <?php
+//SECURE PASSWORD N VERIF IF LOGIN ALREADY EXIST
 session_start();
 if (isset($_POST['submit'])) {
     $login = htmlentities(trim($_POST['login']));
@@ -7,12 +8,26 @@ if (isset($_POST['submit'])) {
 
     if ($login && $password && $repeatpassword) {
         if ($password == $repeatpassword) {
+            //CRYPTAGE MDP
+            $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 15));
+
             $db = mysqli_connect('localhost', 'root', '') or die('Erreur');
             mysqli_select_db($db, 'forum');
 
-            $query = mysqli_query($db, "INSERT INTO utilisateurs (login, password) VALUES('$login', '$password');");
+            //VERIFIER SI LE LOGIN EXISTE DEJA
+            $request = " SELECT login FROM utilisateurs WHERE login = '" . $_POST['login'] . "' ";
+            $query = mysqli_query($db, $request);
+            $test_login = mysqli_fetch_array($query);
 
-            die("Inscription terminée. <a href='connexion.php'>Connectez-vous</a>.");
+            if (!empty($test_login))
+            {
+            echo "Ce login existe déjà ! Veuillez en choisir un autre.";
+            }else{
+                $query = mysqli_query($db, "INSERT INTO utilisateurs (login, password) VALUES('$login', '$password');");
+
+                die("Inscription terminée. <a href='connexion.php'>Connectez-vous</a>.");
+            }
+
         } else {
             echo "Les mots de passes doivent être identiques";
         }
@@ -51,3 +66,4 @@ if (isset($_POST['submit'])) {
 </main>
 </body>
 </html>
+

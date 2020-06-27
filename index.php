@@ -1,5 +1,5 @@
 <?php session_start();
-
+$pageSelected = 'index';
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -24,6 +24,7 @@ if (isset($_POST["deconnexion"])) {
     <?php include("include/header.php") ?>
 </header>
 <main>
+<div class="bg-image"></div>
     <div id="banner">
         <h2>BIENVENUE</h2>
 
@@ -111,6 +112,7 @@ if (isset($_POST["deconnexion"])) {
         }else echo "Veuillez saisir un titre.";
     }
     ?>
+    <div class="center_form_topic">
 <form id="form-add-topics" action="#" method="post">
 
 <label for="titre">Titre:</label><br />
@@ -118,6 +120,7 @@ if (isset($_POST["deconnexion"])) {
 
 <input type="submit" name="submit" value="Ajouter">
 </form>
+</div>
    <?php } ?>
 
 
