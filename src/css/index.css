@@ -11,17 +11,19 @@ html{
     background-color:  #a28089;
 }
 
-#banner{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 main{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.bg-image{
+    background-image: url(../../picture/gaming.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(4px);
+    height: 100vh;
 }
 /*****HEADER****/
 
@@ -145,7 +147,7 @@ i:hover {
 
 }
 table {
-    width: 65%;
+    width: 100%;
     text-align: center;
     border-radius: 10px;
 }
@@ -190,6 +192,12 @@ footer{
         display: flex;
         flex-direction: row;
     }
+    
+    #banner{
+        position: absolute;
+        top: 33%;
+        left: 33%;
+}
 
 }
 
@@ -220,6 +228,12 @@ footer{
         display: flex;
         flex-direction: row;
     }
+    
+    #banner{
+        position: absolute;
+        top: 33%;
+        left: 33%;
+}
 
 
 }
@@ -251,9 +265,14 @@ footer{
         display: flex;
         flex-direction: row;
     }
+    #banner{
+        position: absolute;
+        top: 33%;
+        left: 33%;
+    }
 }
 
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 699px) and (min-width: 600px) {
     #nav-index {
 
         display: flex;
@@ -294,5 +313,107 @@ footer{
     .btn_center {
         display: flex;
         flex-direction: row;
+    }
+    #banner{
+        position: absolute;
+        top: 25%;
+        left: 25%;
+    }
+}
+@media screen and (max-width: 599px) and (min-width: 400px){
+    #nav-index {
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        align-items: center;
+        width: 100%;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h3 {
+
+        color: azure;
+        font-size: 25px;
+        cursor: pointer;
+
+    }
+
+
+    input.recherche {
+        width: 75%;
+    }
+
+    h2 {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        font-size: 35px;
+
+
+    }
+
+    .btn_center {
+        display: flex;
+        flex-direction: row;
+    }
+    #banner{
+        position: absolute;
+        top: 35%;
+        left: 10%;
+    }
+}
+@media screen and (max-width: 399px) {
+    #nav-index {
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        align-items: center;
+        width: 100%;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h3 {
+
+        color: azure;
+        font-size: 25px;
+        cursor: pointer;
+
+    }
+
+
+    input.recherche {
+        width: 75%;
+    }
+
+    h2 {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        font-size: 35px;
+
+
+    }
+
+    .btn_center {
+        display: flex;
+        flex-direction: row;
+    }
+    #banner{
+        position: absolute;
+        top: 35%;
+        left: 10%;
+        right: 10%;
     }
 }

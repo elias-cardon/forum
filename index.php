@@ -24,6 +24,7 @@ if (isset($_POST["deconnexion"])) {
     <?php include("include/header.php") ?>
 </header>
 <main>
+<div class="bg-image"></div>
     <div id="banner">
         <h2>BIENVENUE</h2>
 
