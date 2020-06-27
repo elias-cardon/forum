@@ -5,6 +5,8 @@
     padding: 0;
     font-family: 'Mukta', sans-serif;
     text-decoration: none;
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
 html{
@@ -54,6 +56,10 @@ header {
 .form{
     z-index: 1000000;
 }
+.center_form_topic{
+    display: flex;
+    justify-content: center;
+}
 .btn {
     list-style: none;
     cursor: pointer;
@@ -90,7 +96,7 @@ h2 {
     justify-content: center;
     margin-top: 15px;
     font-size: 60px;
-    color: #9df9ef;
+    color: #51e2f5;
 }
 
 h4 {
@@ -105,12 +111,13 @@ h4 {
 #form-add-topics{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     margin:50px;
     max-width: 100%;
     flex-direction: column;
     background-color: #51e2f5;
     border-radius: 10px;
+    width: 50%;
 }
 #form-add-topics label{
     padding-top:30px;
@@ -287,7 +294,6 @@ footer{
 
     form {
         display: flex;
-        flex-direction: column;
         align-items: center;
     }
 
@@ -386,6 +392,7 @@ footer{
         flex-direction: column;
         align-items: center;
     }
+
 
     h3 {
 

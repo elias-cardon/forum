@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
         if (!empty($verify)) {
             if (password_verify($_POST['password'], $verify['password'])) {
                 $_SESSION['login'] = $login;
-                header('Location:profil.php');
+                header('Location:index.php');
                 exit();
             } else {
                 echo "Impossible de vous authentifier correctement.";
