@@ -36,6 +36,7 @@ $user = mysqli_fetch_all($query);
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link href="default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="fontawesome-templategit.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 	</head>
 	<body class="color">
 	<header>

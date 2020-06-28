@@ -46,10 +46,10 @@ else {
 	<?php
 	$bdd = mysqli_connect ('localhost', 'root', '');
 	mysqli_select_db ($bdd, 'forum') ;
-	$sql = 'SELECT login, titre, date_heure FROM catégorie WHERE id="'.$_GET['id_topics'].'" ORDER BY date_heure ASC';
-	$req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
+	$sql = 'SELECT * FROM catégorie WHERE id="'.$_GET['id_topics'].'" ORDER BY date_heure ASC';
+	$req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
-	while ($data = mysql_fetch_array($req)) {
+	while ($data = mysqli_fetch_array($req)) {
 		sscanf($data['date_reponse'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 		echo '<tr>';
 	echo '<td>';
@@ -67,7 +67,7 @@ else {
 	</table>
 	<br /><br />
 
-	<a href="./message.php?id_categorie=<?php echo $_GET['id_categorie']; ?>">Y aller</a>
+	<a href="./insert_reponse.php?numero_du_sujet=<?php echo $_GET['id_sujet_a_lire']; ?>">Répondre</a>
 	<?php
 }
 ?>

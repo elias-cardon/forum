@@ -45,6 +45,7 @@ if (isset($_POST['submit'])) {
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="src/css/index.css">
     <link rel="stylesheet" type="text/css" href="src/css/inscription.css">
+    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 <body class="color">
 <!-- Header -->

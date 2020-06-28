@@ -53,6 +53,12 @@ header {
 
         color:#edf7F6;
 }
+.fa-gamepad:hover{
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
 .form{
     z-index: 1000000;
 }
@@ -104,12 +110,15 @@ h2 {
 
 h4 {
 
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: white;
+display: flex;
 
+justify-content: center;
+
+font-size: 30px;
+
+margin-bottom: 20px;
+
+color: #edf7F6;
 }
 #form-add-topics{
     display: flex;
@@ -124,6 +133,8 @@ h4 {
 }
 #form-add-topics label{
     padding-top:30px;
+    color: #edf7F6;
+    font-size: 1.3em;
 }
 input {
 border: none;
@@ -349,12 +360,22 @@ footer{
     }
 
     h3 {
-
-        color: azure;
-        font-size: 25px;
-        cursor: pointer;
-
-    }
+color: azure;
+font-size: 25px;
+cursor: pointer;
+color: mix(#fff, #e91e63, 85%);
+/* font-size: calc(1em + 20vw); */
+font-weight: 900;
+text-shadow: 
+  -0.0075em 0.0075em 0 mix(#fff, #e91e63, 94%),
+  0.005em 0.005em 0 mix(#fff, #e91e63, 60%),
+  0.01em 0.01em 0 mix(#fff, #e91e63, 62%), 
+  0.015em 0.015em mix(#fff, #e91e63, 64%), 
+  0.02em 0.02em 0 mix(#fff, #e91e63, 66%), 
+  0.025em 0.025em 0 mix(#fff, #e91e63, 68%),
+  0.03em 0.03em 0 mix(#fff, #e91e63, 70%),
+  0.035em 0.035em 0 mix(#fff, #e91e63, 72%);
+}
 
 
     input.recherche {
@@ -430,3 +451,23 @@ footer{
         right: 10%;
     }
 }
+
+/*KEYFRAMES*/
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }

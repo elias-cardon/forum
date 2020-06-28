@@ -1,15 +1,19 @@
 <script src="https://kit.fontawesome.com/68a550b660.js" crossorigin="anonymous"></script>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  />
     
     <nav id="nav-index">
         <div id="top-title">
-            <a href="index.php"><h3>Le Bon Game</h3></a><i class="fas fa-gamepad"></i>
+            <a href="index.php"><h3 class="animate__animated animate__backInLeft">Le Bon Game</h3></a><i class="fas fa-gamepad"></i>
         </div>
         <?php 
           if(!isset($_SESSION['login'])){
             ?>
             <div class="btn_center">
-            <div class="btn"><a href="connexion.php">Se connecter</a></div>
-            <div class="btn"><a href="inscription.php">S'inscrire</a></div>
+            <div class="btn animate__animated animate__bounceIn"><a href="connexion.php">Se connecter</a></div>
+            <div class="btn animate__animated animate__bounceIn"><a href="inscription.php">S'inscrire</a></div>
             </div>
         <?php
           }

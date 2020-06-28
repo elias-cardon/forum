@@ -17,6 +17,7 @@ if (isset($_POST["deconnexion"])) {
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/css/index.css">
+    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 
 <body>
@@ -67,7 +68,7 @@ if (isset($_POST["deconnexion"])) {
                     echo htmlentities(trim($data['login']));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topics=', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data['id']), '">', htmlentities(trim($data['titre'])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
@@ -114,7 +115,7 @@ if (isset($_POST["deconnexion"])) {
     ?>
     <div class="center_form_topic">
 <form id="form-add-topics" action="#" method="post">
-
+<h4>Ajouter un Topic ici !</h4>
 <label for="titre">Titre:</label><br />
 <input type="text" name="titre">
 
