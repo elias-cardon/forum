@@ -67,7 +67,7 @@ else {
 	</table>
 	<br /><br />
 
-	<a href="./insert_reponse.php?numero_du_sujet=<?php echo $_GET['id_sujet_a_lire']; ?>">Répondre</a>
+	<a href="./message.php?id_categorie=<?php echo $_GET['id_categorie']; ?>">Y aller</a>
 	<?php
 }
 ?>
