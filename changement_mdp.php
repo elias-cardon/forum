@@ -1,5 +1,8 @@
 <?php session_start();
 
+$pageSelected = 'profil';
+
+
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -50,6 +53,7 @@ if (isset($_SESSION['login'])) {
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/changement_mdp.css">
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
 </head>
 <body>
 <!-- Header -->
