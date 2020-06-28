@@ -67,7 +67,7 @@ if (isset($_POST["deconnexion"])) {
                     echo htmlentities(trim($data['login']));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topics=', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data['id']), '">', htmlentities(trim($data['titre'])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;

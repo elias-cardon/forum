@@ -47,9 +47,9 @@ else {
 	$bdd = mysqli_connect ('localhost', 'root', '');
 	mysqli_select_db ($bdd, 'forum') ;
 	$sql = 'SELECT * FROM catégorie WHERE id="'.$_GET['id_topics'].'" ORDER BY date_heure ASC';
-	$req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
+	$req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
-	while ($data = mysql_fetch_array($req)) {
+	while ($data = mysqli_fetch_array($req)) {
 		sscanf($data['date_reponse'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 		echo '<tr>';
 	echo '<td>';
