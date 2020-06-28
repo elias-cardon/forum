@@ -46,7 +46,7 @@ else {
 	<?php
 	$bdd = mysqli_connect ('localhost', 'root', '');
 	mysqli_select_db ($bdd, 'forum') ;
-	$sql = 'SELECT * FROM catégorie WHERE id="'.$_GET['id_topics'].'" ORDER BY date_heure ASC';
+	$sql = 'SELECT login, titre, date_heure FROM catégorie WHERE id="'.$_GET['id_topics'].'" ORDER BY date_heure ASC';
 	$req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
 
 	while ($data = mysql_fetch_array($req)) {
