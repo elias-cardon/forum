@@ -103,13 +103,11 @@ h2 {
 }
 
 h4 {
-
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: white;
-
+display: flex;
+justify-content: center;
+font-size: 30px;
+margin-bottom: 20px;
+color: #edf7F6;
 }
 #form-add-topics{
     display: flex;
@@ -124,6 +122,8 @@ h4 {
 }
 #form-add-topics label{
     padding-top:30px;
+    color: #edf7F6;
+    font-size: 1.3em;
 }
 input {
 border: none;
