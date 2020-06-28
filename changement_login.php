@@ -51,6 +51,7 @@ if (isset($_SESSION['login'])) {
     <title>Changement de login</title>
     <link rel="stylesheet" type="text/css" href="src/css/index.css">
     <link rel="stylesheet" type="text/css" href="css/changement_login.css">
+    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 <body>
 <!-- Header -->

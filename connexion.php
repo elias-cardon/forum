@@ -35,6 +35,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="src/css/connexion.css">
     <link rel="stylesheet" type="text/css" href="src/css/index.css">
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 <body class="color">
 <!-- Header -->
