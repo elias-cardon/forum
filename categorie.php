@@ -1,5 +1,8 @@
 <?php session_start();
 
+$pageSelected = 'profil';
+
+
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -25,7 +28,7 @@ if (isset($_POST["deconnexion"])) {
 </header>
 <main>
 	<?php
-if (!isset($_GET['id_topic'])) {
+if (!isset($_GET['id_topics'])) {
 	echo 'Sujet non défini.';
 }
 else {
@@ -43,7 +46,7 @@ else {
 	<?php
 	$bdd = mysqli_connect ('localhost', 'root', '');
 	mysqli_select_db ($bdd, 'forum') ;
-	$sql = 'SELECT * FROM catégorie WHERE id="'.$_GET['id_topic'].'" ORDER BY date_heure ASC';
+	$sql = 'SELECT * FROM catégorie WHERE id="'.$_GET['id_topics'].'" ORDER BY date_heure ASC';
 	$req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
 
 	while ($data = mysql_fetch_array($req)) {
