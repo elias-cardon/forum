@@ -9,9 +9,12 @@
     /* flex-direction: column; */
 }
 
+<<<<<<< HEAD
 html{
 }
 
+=======
+>>>>>>> 7355d4bed60bb797adfae7494690f2476ee8ea28
 main{
     min-height: 100vh;
     display: flex;
@@ -478,4 +481,8 @@ text-shadow:
     40%, 60% {
       transform: translate3d(4px, 0, 0);
     }
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> 7355d4bed60bb797adfae7494690f2476ee8ea28
