@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<nav id="nav-index">
-        <div id="top-logo">
-          <img class="logo"
-        <div id="top-title">
-            <a href="index.php"><h3>SOLUCES GAMING</h3>
-=======
 <script src="https://kit.fontawesome.com/68a550b660.js" crossorigin="anonymous"></script>
 <link
     rel="stylesheet"
@@ -14,19 +7,13 @@
     <nav id="nav-index">
         <div id="top-title">
             <a href="index.php"><h3 class="animate__animated animate__backInLeft">Le Bon Game</h3></a><i class="fas fa-gamepad"></i>
->>>>>>> master
         </div>
         <?php 
           if(!isset($_SESSION['login'])){
             ?>
             <div class="btn_center">
-<<<<<<< HEAD
-            <button class="bttn-unite bttn-md bttn-primary"><a href="connexion.php">Se connecter</button></a>
-            <button class="bttn-unite bttn-md bttn-primary"><a href="inscription.php">S'inscrire</a></div>
-=======
             <div class="btn animate__animated animate__bounceIn"><a href="connexion.php">Se connecter</a></div>
             <div class="btn animate__animated animate__bounceIn"><a href="inscription.php">S'inscrire</a></div>
->>>>>>> master
             </div>
         <?php
           }
