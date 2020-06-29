@@ -1,5 +1,5 @@
 <?php session_start();
-
+$pageSelected = 'index';
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
