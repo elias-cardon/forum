@@ -1,5 +1,5 @@
 <?php session_start();
-
+$pageSelected = 'index';
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -35,7 +35,6 @@ if (isset($_POST["deconnexion"])) {
                     INNER JOIN topics';
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
-        var_dump($datas);
 
         ?>
         <div class="table-center">
