@@ -35,7 +35,7 @@ if (isset($_POST["deconnexion"])) {
         $requete = 'SELECT categories.*, utilisateurs.*,topics.* 
                     FROM categories 
                     INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
-                    INNER JOIN topics';
+                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs';
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
 
