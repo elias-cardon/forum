@@ -9,13 +9,13 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title> Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
@@ -27,7 +27,7 @@ if (isset($_POST["deconnexion"])) {
 <main>
 <div class="bg-image"></div>
     <div id="banner">
-        <h2>BIENVENUE SUR LE FORUM</h2>
+        <h2>BIENVENUE</h2>
 
         <br/><br/>
 
@@ -45,7 +45,6 @@ if (isset($_POST["deconnexion"])) {
             echo 'Aucun sujet';
         } else {
             ?>
-            <div class="table-center">
             <table width="500" border="1">
                 <tr>
                     <th>
@@ -75,7 +74,7 @@ if (isset($_POST["deconnexion"])) {
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
                 }
                 ?>
-                </td></tr></table></div>
+                </td></tr></table>
             <?php
         }
         mysqli_free_result($req);
