@@ -16,6 +16,7 @@ if (isset($_POST["deconnexion"])) {
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/css/index.css">
+    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 <body>
 <header>
