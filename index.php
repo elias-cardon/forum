@@ -9,15 +9,14 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title> Le Bon Game</title>
+    <title>SOLUCES GAMING</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
-    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 
 <body>
@@ -25,9 +24,10 @@ if (isset($_POST["deconnexion"])) {
     <?php include("include/header.php") ?>
 </header>
 <main>
-<div class="bg-image"></div>
     <div id="banner">
-        <h2>BIENVENUE</h2>
+        <h2>BIENVENUE SUR LE FORUM</h2>
+
+        <a href="topic.php">Insérer un sujet</a>
 
         <br/><br/>
 
@@ -35,9 +35,9 @@ if (isset($_POST["deconnexion"])) {
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
 
-        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
+        $sql = 'SELECT * FROM topics ORDER BY date_heure DESC';
 
-        $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
+        $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysqli_error());
 
         $nb_sujets = mysqli_num_rows($req);
 
@@ -45,17 +45,18 @@ if (isset($_POST["deconnexion"])) {
             echo 'Aucun sujet';
         } else {
             ?>
+            <div class="table-center">
             <table width="500" border="1">
                 <tr>
-                    <th>
+                    <td>
                         Auteur
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         Titre du sujet
-                    </th>
-                    <th>
-                        Date de création
-                    </th>
+                    </td>
+                    <td>
+                        Date dernière réponse
+                    </td>
                 </tr>
                 <?php
                 while ($data = mysqli_fetch_array($req)) {
@@ -68,62 +69,18 @@ if (isset($_POST["deconnexion"])) {
                     echo htmlentities(trim($data['login']));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data['id']), '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="catgorie.php', $data['id'], '">', htmlentities(trim($data['titre'])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
                 }
                 ?>
-                </td></tr></table>
+                </td></tr></table></div>
             <?php
         }
         mysqli_free_result($req);
         ?>
-        
     </div>
-
-    <?php
-
-    if(isset($_SESSION['login'])){
-
-    if(isset($_POST['submit'])){
-
-        //SECURE TITRE
-        $titre = htmlspecialchars($_POST['titre']);
-
-        if(!empty($titre)){
-
-            //connexion à la bdd
-            try {
-                $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
-            }catch(PDOException $e){
-                echo 'Erreur : ' . $e->getMessage();
-            }
-            $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC');
-            $prepare->execute([$_SESSION['login']]);
-            $user = $prepare->fetch(PDO::FETCH_ASSOC);
-            //inserer dans bdd  
-            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure)
-                                    VALUES(:id_utilisateurs, :titre, CURTIME())");
-            $insert->execute(array('id_utilisateurs' => (int)$user['id'], 
-                                'titre' => $titre));
-
-            header("location:index.php");
-
-        }else echo "Veuillez saisir un titre.";
-    }
-    ?>
-    <div class="center_form_topic">
-<form id="form-add-topics" action="#" method="post">
-<h4>Ajouter un Topic ici !</h4>
-<label for="titre">Titre:</label><br />
-<input type="text" name="titre">
-
-<input type="submit" name="submit" value="Ajouter">
-</form>
-</div>
-   <?php } ?>
-
 
 </main>
 <footer>
