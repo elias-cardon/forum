@@ -1,5 +1,15 @@
+<?php session_start();
+
+$pageSelected = 'profil';
+
+
+if (isset($_POST["deconnexion"])) {
+    session_unset();
+    session_destroy();
+    header('Location:index.php');
+}
+?>
 <?php
-session_start();
 if (isset($_SESSION['login'])) {
     $username = $_SESSION['login'];
     if (isset($_POST['submit'])) {
@@ -39,8 +49,9 @@ if (isset($_SESSION['login'])) {
 <html>
 <head>
     <title>Changement de login</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
     <link rel="stylesheet" type="text/css" href="css/changement_login.css">
+    <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
 <body>
 <!-- Header -->
