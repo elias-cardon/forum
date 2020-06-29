@@ -94,3 +94,5 @@ if (isset($_POST["deconnexion"])) {
         <?php include("include/footer.php") ?>
     </footer>
 </body>
+
+</html>
