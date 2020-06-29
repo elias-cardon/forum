@@ -96,13 +96,7 @@ if (isset($_POST["deconnexion"])) {
     </footer>
 </body>
 
-</html> categories.id_utilisateurs = utilisateurs.id
-                    INNER JOIN topics';
-        $query = mysqli_query($bdd, $requete);
-        $datas = mysqli_fetch_all($query);
-        var_dump($datas);
-
-        ?>
+</html>
         <div class="table-center">
             <table width="500" border="1">
                 <tr>
@@ -160,6 +154,4 @@ if (isset($_POST["deconnexion"])) {
         <?php include("include/footer.php") ?>
     </footer>
 </body>
-
->>>>>>> lea
 </html>
