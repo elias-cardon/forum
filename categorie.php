@@ -35,7 +35,6 @@ if (isset($_POST["deconnexion"])) {
                     INNER JOIN topics';
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
-        var_dump($datas);
 
         ?>
         <div class="table-center">
@@ -95,63 +94,3 @@ if (isset($_POST["deconnexion"])) {
         <?php include("include/footer.php") ?>
     </footer>
 </body>
-
-</html>
-        <div class="table-center">
-            <table width="500" border="1">
-                <tr>
-                    <td>
-                        Titre topics
-                    </td>
-                    <td>
-                        Titre catégorie
-                    </td>
-                    <td>
-                        Login
-                    </td>
-                    <td>
-                        Date, heure de poste
-                    </td>
-                </tr>
-                <?php
-
-
-                foreach ($datas as $key => $data) {
-                    echo '<tr>';
-                    echo '<td>';
-                    echo htmlentities(trim($datas[$key][9]));
-
-
-                    echo '</td>';
-                    echo '<td>';
-
-                    // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="topics.php?id=', $datas[$key][4], '">', htmlentities(trim($datas[$key][3])), '</a>';
-                    echo '</td>';
-                    echo '<td>';
-                    echo htmlentities(trim($datas[$key][6]));
-
-
-
-                    echo '</td>';
-                    echo '<td>';
-                    echo htmlentities(trim($datas[$key][2]));
-
-                    echo '</td>';
-                    echo '</tr>';
-
-                ?>
-                <?php } ?>
-
-            </table>
-        </div>
-        <?php
-        mysqli_free_result($query);
-        ?>
-        </div>
-    </main>
-    <footer>
-        <?php include("include/footer.php") ?>
-    </footer>
-</body>
-</html>
