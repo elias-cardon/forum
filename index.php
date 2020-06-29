@@ -11,7 +11,7 @@ if (isset($_POST["deconnexion"])) {
 <html>
 
 <head>
-    <title> Réservation-Salles</title>
+    <title> Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
