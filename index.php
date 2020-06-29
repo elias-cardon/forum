@@ -10,11 +10,7 @@ if (isset($_POST["deconnexion"])) {
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
     <title> Le Bon Game</title>
-=======
-    <title>SOLUCES GAMING</title>
->>>>>>> lea
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
