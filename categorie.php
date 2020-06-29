@@ -1,11 +1,6 @@
 <?php session_start();
-
-<<<<<<< HEAD
 $pageSelected = 'profil';
 
-
-=======
->>>>>>> lea
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -15,7 +10,6 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 <head>
 	<title>Catégorie</title>
 	<meta charset="utf-8">
