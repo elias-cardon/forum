@@ -27,7 +27,7 @@ if (isset($_POST["deconnexion"])) {
 <main>
 <div class="bg-image"></div>
     <div id="banner">
-        <h2>BIENVENUE</h2>
+        <h2>BIENVENUE SUR LE FORUM</h2>
 
         <br/><br/>
 
