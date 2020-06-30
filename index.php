@@ -9,13 +9,13 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title> Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
@@ -45,7 +45,6 @@ if (isset($_POST["deconnexion"])) {
             echo 'Aucun sujet';
         } else {
             ?>
-            <div class="table-center">
             <table width="500" border="1">
                 <tr>
                     <th>
@@ -75,7 +74,7 @@ if (isset($_POST["deconnexion"])) {
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
                 }
                 ?>
-                </td></tr></table></div>
+                </td></tr></table>
             <?php
         }
         mysqli_free_result($req);
@@ -116,11 +115,10 @@ if (isset($_POST["deconnexion"])) {
     ?>
     <div class="center_form_topic">
 <form id="form-add-topics" action="#" method="post">
-<h4>Ajouter un Topic ici !</h4>
-<label for="titre">Titre:</label><br />
-<input type="text" name="titre">
-
-<input type="submit" name="submit" value="Ajouter">
+<h4 class="title-form">AJOUTER UN TOPIC ICI !</h4>
+<input type="text" name="titre" placeholder="Saisir un titre">
+<input type="text" name="titre" placeholder="Message">
+<input class="button" type="submit" name="submit" value="POSTER">
 </form>
 </div>
    <?php } ?>

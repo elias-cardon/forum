@@ -1,8 +1,5 @@
 <?php session_start();
-
 $pageSelected = 'profil';
-
-
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -11,11 +8,8 @@ if (isset($_POST["deconnexion"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
-
 <head>
-    <title> Le Bon Game</title>
+    <title>Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes" />
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
@@ -42,21 +36,22 @@ if (isset($_POST["deconnexion"])) {
         $datas = mysqli_fetch_all($query);
 
         ?>
+        <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
                 <tr>
-                    <td>
+                    <th>
                         Titre topics
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Titre catégorie
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Login
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Date, heure de poste
-                    </td>
+                    </th>
                 </tr>
                 <?php
 
@@ -71,7 +66,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="topics.php?id=', $datas[$key][4], '">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '<a href="message.php?id=2','">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
@@ -89,6 +84,7 @@ if (isset($_POST["deconnexion"])) {
                 <?php } ?>
 
             </table>
+            </div>
         </div>
         <?php
         mysqli_free_result($query);
@@ -99,5 +95,4 @@ if (isset($_POST["deconnexion"])) {
         <?php include("include/footer.php") ?>
     </footer>
 </body>
-
 </html>
