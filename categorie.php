@@ -1,6 +1,5 @@
 <?php session_start();
 $pageSelected = 'profil';
-
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -9,7 +8,7 @@ if (isset($_POST["deconnexion"])) {
 ?>
 
 <head>
-    <title>Le Bon Gaming</title>
+    <title>Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes" />
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
@@ -64,7 +63,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="topics.php?id=', $datas[$key][4], '">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '<a href="message.php?id=2','">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
