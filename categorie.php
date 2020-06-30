@@ -32,7 +32,10 @@ if (isset($_POST["deconnexion"])) {
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
-        $requete = 'SELECT categories.*, utilisateurs.login,topics.titre FROM categories INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id INNER JOIN topics';
+        $requete = 'SELECT categories.*, utilisateurs.*,topics.* 
+                    FROM categories 
+                    INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
+                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs';
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
 
@@ -41,16 +44,16 @@ if (isset($_POST["deconnexion"])) {
             <table width="500" border="1">
                 <tr>
                     <td>
-                        <strong>Titre topics</strong>
+                        Titre topics
                     </td>
                     <td>
-                        <strong>Titre catégorie</strong>
+                        Titre catégorie
                     </td>
                     <td>
-                        <strong>Login</strong>
+                        Login
                     </td>
                     <td>
-                        <strong>Date, heure de poste</strong>
+                        Date, heure de poste
                     </td>
                 </tr>
                 <?php
@@ -59,19 +62,24 @@ if (isset($_POST["deconnexion"])) {
                 foreach ($datas as $key => $data) {
                     echo '<tr>';
                     echo '<td>';
+                    echo htmlentities(trim($datas[$key][9]));
+
+
+                    echo '</td>';
+                    echo '<td>';
+
+                    // echo htmlentities(trim($datas[$key][2]));
+                    echo '<a href="message.php?id_categorie=', $datas[$key][4], '">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '</td>';
+                    echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
-                    echo '</td>';
 
-                    echo '<td>';
-                    echo '<a href="message.php?id_categorie=', $datas[$key][5], '">', htmlentities(trim($datas[$key][3])), '</a>';
-                    echo '</td>';
 
-                    echo '<td>';
-                    echo htmlentities(trim($datas[$key][5]));
-                    echo '</td>';
 
+                    echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][2]));
+
                     echo '</td>';
                     echo '</tr>';
 
