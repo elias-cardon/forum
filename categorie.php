@@ -8,6 +8,7 @@ if (isset($_POST["deconnexion"])) {
     session_destroy();
     header('Location:index.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,11 @@ if (isset($_POST["deconnexion"])) {
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
-        $requete = 'SELECT categories.*, utilisateurs.login,topics.titre FROM categories INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id INNER JOIN topics';
+        $myId = $_GET['id_topics'];
+        $requete = "SELECT categories.*, utilisateurs.*,topics.* 
+                    FROM categories 
+                    INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
+                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myId";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
 
