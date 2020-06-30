@@ -64,7 +64,7 @@ if (isset($_POST["deconnexion"])) {
                 foreach ($datas as $key => $data) {
                     echo '<tr>';
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][6]));
+                    echo htmlentities(trim($datas[$key][9]));
                     echo '</td>';
 
                     echo '<td>';
@@ -72,7 +72,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '</td>';
 
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][5]));
+                    echo htmlentities(trim($datas[$key][6]));
                     echo '</td>';
 
                     echo '<td>';
