@@ -19,6 +19,7 @@
           }
         ?>
 <?php
+$pageSelected = 'profil';
 if (isset($_SESSION['login'])) {
     ?>
     
