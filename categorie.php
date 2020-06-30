@@ -26,29 +26,31 @@ if (isset($_POST["deconnexion"])) {
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
-        $requete = 'SELECT categories.*, utilisateurs.*,topics.* 
+        $myId = $_GET['id_topics'];
+        $requete = "SELECT categories.*, utilisateurs.*,topics.* 
                     FROM categories 
                     INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
-                    INNER JOIN topics';
+                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myId";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
 
         ?>
+        <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
                 <tr>
-                    <td>
+                    <th>
                         Titre topics
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Titre catégorie
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Login
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Date, heure de poste
-                    </td>
+                    </th>
                 </tr>
                 <?php
 
@@ -81,6 +83,7 @@ if (isset($_POST["deconnexion"])) {
                 <?php } ?>
 
             </table>
+            </div>
         </div>
         <?php
         mysqli_free_result($query);

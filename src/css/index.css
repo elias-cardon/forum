@@ -9,12 +9,6 @@
     /* flex-direction: column; */
 }
 
-<<<<<<< HEAD
-html{
-}
-
-=======
->>>>>>> 7355d4bed60bb797adfae7494690f2476ee8ea28
 main{
     min-height: 100vh;
     display: flex;
@@ -106,51 +100,55 @@ header {
 h2 {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
     font-size: 60px;
-    color: #51e2f5;
+    color: white;
+    background-color: #ffa8B6;
+    width: 700px;
+    padding: 5px;
+    border-radius: 10px;
 }
 
-h4 {
+.title-form {
 
-display: flex;
-
-justify-content: center;
-
-font-size: 30px;
-
-margin-bottom: 20px;
-
-color: #edf7F6;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #edf7F6;
 }
+
 #form-add-topics{
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    margin:50px;
+    margin: 40px;
     max-width: 100%;
     flex-direction: column;
     background-color: #51e2f5;
     border-radius: 10px;
-    width: 50%;
-}
-#form-add-topics label{
-    padding-top:30px;
-    color: #edf7F6;
-    font-size: 1.3em;
-}
-input {
-border: none;
-outline: none;
-width: 300px;
-margin: 2px;
-padding: 5px;
-font-size: 15px;
-border: 3px solid rgb(177, 122, 165);
-width: 30%;
-border-radius: 1rem;
+    width: 40%;
 }
 
+input {
+    border: none;
+    outline: none;
+    width: 300px;
+    margin: 5px;
+    padding: 8px;
+    font-size: 15px;
+    border: 3px solid #ffa8B6;
+    width: 40%;
+    border-radius: 1rem;
+}
+.button {
+
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: #ffa8B6;
+    margin-top: 10px;
+    
+}
 input[type=submit]{
     width: 20%;
     cursor: pointer;
@@ -173,18 +171,47 @@ i:hover {
 
 }
 table {
+
+    border-collapse: collapse;
     width: 100%;
     text-align: center;
-    border-radius: 10px;
 }
+
 table td,th{
     padding: 10px;
     background-color: #edf7F6;
+    border: white 3px solid;
 }
 table th{
-    background-color: #51E2F5;
+    background-color: #ffa8B6;
     color:#edf7F6;
 }
+
+
+/**** CATEGORIE****/
+.center {
+
+    display: flex;
+    justify-content: center;
+}
+
+.table-center {
+
+    width: 70%;
+    border-collapse: collapse;
+}
+
+.table-center td,th {
+    padding: 10px;
+    background-color: #edf7F6;
+    border: rgb(219, 219, 219) 3px solid;
+}
+
+th{
+    background-color: #ffa8B6;
+    color:#edf7F6;
+}
+
 /****FOOTER***/
 footer{
     display: flex;
@@ -481,8 +508,4 @@ text-shadow:
     40%, 60% {
       transform: translate3d(4px, 0, 0);
     }
-<<<<<<< HEAD
   }
-=======
-  }
->>>>>>> 7355d4bed60bb797adfae7494690f2476ee8ea28
