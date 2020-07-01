@@ -60,21 +60,23 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                 </tr>
                 <?php
-                while ($data = mysqli_fetch_array($req)) {
-
-                    sscanf($data['date_heure'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                $datas = mysqli_fetch_all($req);
+                foreach ($datas as $key => $data) {
+                    sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 
                     echo '<tr>';
                     echo '<td>';
 
-                    echo htmlentities(trim($data['login']));
+                    echo htmlentities(trim($data[6]));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data['id']), '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
-                }
+                 } 
+                    
+                
                 ?>
                 </td></tr></table></div>
             <?php
