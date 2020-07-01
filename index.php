@@ -35,7 +35,7 @@ if (isset($_POST["deconnexion"])) {
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
 
-        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id = utilisateurs.id ORDER BY date_heure DESC';
+        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
@@ -85,7 +85,6 @@ if (isset($_POST["deconnexion"])) {
     <?php
 
     if(isset($_SESSION['login'])){
-
     if(isset($_POST['submit'])){
 
         //SECURE TITRE
@@ -94,6 +93,7 @@ if (isset($_POST["deconnexion"])) {
         if(!empty($titre)){
 
             //connexion à la bdd
+            echo "qqq";
             try {
                 $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
             }catch(PDOException $e){
@@ -109,7 +109,7 @@ if (isset($_POST["deconnexion"])) {
                                 'titre' => $titre,
                                 'login' => $_SESSION['login']));
 
-            header("location:index.php");
+            //header("location:index.php");
 
         }else echo "Veuillez saisir un titre.";
     }
