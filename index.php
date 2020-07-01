@@ -35,7 +35,7 @@ if (isset($_POST["deconnexion"])) {
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
 
-        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id = utilisateurs.id ORDER BY date_heure DESC';
+        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
@@ -53,6 +53,7 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                     <th>
                         Titre du sujet
+                    
                     </th>
                     <th>
                         Date de création
@@ -86,7 +87,6 @@ if (isset($_POST["deconnexion"])) {
     <?php
 
     if(isset($_SESSION['login'])){
-
     if(isset($_POST['submit'])){
 
         //SECURE TITRE
@@ -104,23 +104,22 @@ if (isset($_POST["deconnexion"])) {
             $prepare->execute([$_SESSION['login']]);
             $user = $prepare->fetch(PDO::FETCH_ASSOC);
             //inserer dans bdd  
-            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure)
-                                    VALUES(:id_utilisateurs, :titre, CURTIME())");
+            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure, login)
+                                    VALUES(:id_utilisateurs, :titre, CURTIME(), :login)");
             $insert->execute(array('id_utilisateurs' => (int)$user['id'], 
-                                'titre' => $titre));
+                                'titre' => $titre,
+                                'login' => $_SESSION['login']));
 
-            header("location:index.php");
+            //header("location:index.php");
 
         }else echo "Veuillez saisir un titre.";
     }
     ?>
     <div class="center_form_topic">
 <form id="form-add-topics" action="#" method="post">
-<h4>Ajouter un Topic ici !</h4>
-<label for="titre">Titre:</label><br />
-<input type="text" name="titre">
-
-<input type="submit" name="submit" value="Ajouter">
+<h4 class="title-form">AJOUTER UN TOPIC ICI !</h4>
+<input type="text" name="titre" placeholder="Saisir un titre">
+<input class="button" type="submit" name="submit" value="POSTER">
 </form>
 </div>
    <?php } ?>

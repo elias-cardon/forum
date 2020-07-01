@@ -1,8 +1,5 @@
 <?php session_start();
-
 $pageSelected = 'profil';
-
-
 if (isset($_POST["deconnexion"])) {
     session_unset();
     session_destroy();
@@ -11,11 +8,8 @@ if (isset($_POST["deconnexion"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html>
-
 <head>
-    <title> Le Bon Game</title>
+    <title>Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes" />
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
@@ -33,30 +27,30 @@ if (isset($_POST["deconnexion"])) {
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
-        $myId = $_GET['id_topics'];
+        $myid = $_GET['id_topics'];
         $requete = "SELECT categories.*, utilisateurs.*,topics.* 
                     FROM categories 
                     INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
-                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myId";
+                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myid";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
-
         ?>
+        <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
                 <tr>
-                    <td>
+                    <th>
                         Titre topics
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Titre catégorie
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Login
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                         Date, heure de poste
-                    </td>
+                    </th>
                 </tr>
                 <?php
 
@@ -71,7 +65,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id_categorie=', $datas[$key][4], '">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '<a href="message.php?id_categorie=','">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
@@ -89,15 +83,53 @@ if (isset($_POST["deconnexion"])) {
                 <?php } ?>
 
             </table>
+            </div>
         </div>
         <?php
         mysqli_free_result($query);
         ?>
+         <?php if(isset($_SESSION['login'])){
+
+if(isset($_POST['submit'])){
+
+    //SECURE TITRE
+    $titre = htmlspecialchars($_POST['titre']);
+
+    if(!empty($titre)){
+
+        //connexion à la bdd
+        try {
+            $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+        }catch(PDOException $e){
+            echo 'Erreur : ' . $e->getMessage();
+        }
+        $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC'); # Pourquoi order si c'est déjà ordonné dans l'index ? Pourquoi demander un login si l'admin est le seul a pouvoir ajouter des catégories.
+        $prepare->execute([$_SESSION['login']]);
+        $user = $prepare->fetch(PDO::FETCH_ASSOC);
+        //inserer dans bdd  
+        $insert = $bdd->prepare("INSERT INTO categories(id_topics, id_utilisateurs, titre, date_heure) 
+                                VALUES(:id_topics, :id_utilisateurs, :titre, CURTIME())");
+        $insert->execute(array('id_topics' => '1',
+                            'id_utilisateurs' => (int)$user['id'], 
+                            'titre' => $titre));
+
+        header("location:categorie.php");
+
+    }else echo "Veuillez saisir un titre.";
+}
+?>
+<div class="center_form_topic">
+<form id="form-add-topics" action="categorie.php" method="post">
+<h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
+<input type="text" name="titre" placeholder="Saisir un titre">
+<input class="button" type="submit" name="submit" value="POSTER">
+</form>
+</div>
+<?php } ?>
         </div>
     </main>
     <footer>
         <?php include("include/footer.php") ?>
     </footer>
 </body>
-
 </html>
