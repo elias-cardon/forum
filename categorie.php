@@ -114,8 +114,6 @@ if(isset($_POST['submit'])){
                             'id_utilisateurs' => (int)$user['id'], 
                             'titre' => $titre));
 
-        header("location:categorie.php");
-
     }else echo "Veuillez saisir un titre.";
 }
 ?>
