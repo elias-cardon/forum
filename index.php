@@ -103,10 +103,11 @@ if (isset($_POST["deconnexion"])) {
             $prepare->execute([$_SESSION['login']]);
             $user = $prepare->fetch(PDO::FETCH_ASSOC);
             //inserer dans bdd  
-            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure)
-                                    VALUES(:id_utilisateurs, :titre, CURTIME())");
+            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure, login)
+                                    VALUES(:id_utilisateurs, :titre, CURTIME(), :login)");
             $insert->execute(array('id_utilisateurs' => (int)$user['id'], 
-                                'titre' => $titre));
+                                'titre' => $titre,
+                                'login' => $_SESSION['login']));
 
             header("location:index.php");
 
@@ -117,7 +118,6 @@ if (isset($_POST["deconnexion"])) {
 <form id="form-add-topics" action="#" method="post">
 <h4 class="title-form">AJOUTER UN TOPIC ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
-<input type="text" name="titre" placeholder="Message">
 <input class="button" type="submit" name="submit" value="POSTER">
 </form>
 </div>
