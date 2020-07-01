@@ -160,9 +160,15 @@ i:hover {
 }
 table {
 
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
+border-collapse: collapse;
+
+width: 100%;
+
+height: 100px;
+
+overflow: auto;
+
+text-align: center;
 }
 
 table td,th{
@@ -293,7 +299,7 @@ footer{
         position: absolute;
         top: 33%;
         left: 33%;
-        width:;
+        height: 100%;
 }
 
 

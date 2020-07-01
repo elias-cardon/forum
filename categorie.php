@@ -27,13 +27,13 @@ if (isset($_POST["deconnexion"])) {
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
-        $myId = $_GET['id_topics'];
-        $requete = "SELECT categories.*, utilisateurs.*,topics.* 
-                    FROM categories 
-                    INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
-                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myId";
+        $myid = $_GET['id_topics'];
+        $requete = "SELECT c.*, u.*,t.* 
+                    FROM categories as c, utilisateurs as u, topics as t
+                    WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
+
         ?>
         <div class="center"> 
         <div class="table-center">
@@ -65,7 +65,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo "<a href=\"message.php?id_topics=\"$myId\">", htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '<a href="message.php?id_categorie=','">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
@@ -108,15 +108,17 @@ if(isset($_POST['submit'])){
         //inserer dans bdd  
         $insert = $bdd->prepare("INSERT INTO categories(id_topics, id_utilisateurs, titre, date_heure) 
                                 VALUES(:id_topics, :id_utilisateurs, :titre, CURTIME())");
-        $insert->execute(array('id_topics' => '1',
+        $insert->execute(array('id_topics' => $myid,
                             'id_utilisateurs' => (int)$user['id'], 
                             'titre' => $titre));
+
+        header("location: categorie.php?id_topics=" . $myid);
 
     }else echo "Veuillez saisir un titre.";
 }
 ?>
 <div class="center_form_topic">
-<form id="form-add-topics" action="categorie.php" method="post">
+<form id="form-add-topics" action="categorie.php?id_topics=<?= $myid ?>" method="post">
 <h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
 <input class="button" type="submit" name="submit" value="POSTER">

@@ -18,6 +18,7 @@ if (isset($_POST["deconnexion"])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
+    
 </head>
 
 <body>
@@ -34,8 +35,7 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-
-        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
+        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
@@ -87,6 +87,7 @@ if (isset($_POST["deconnexion"])) {
     <?php
 
     if(isset($_SESSION['login'])){
+        $login = $_SESSION['login'];
     if(isset($_POST['submit'])){
 
         //SECURE TITRE
@@ -110,7 +111,7 @@ if (isset($_POST["deconnexion"])) {
                                 'titre' => $titre,
                                 'login' => $_SESSION['login']));
 
-            //header("location:index.php");
+            header("location:index.php");
 
         }else echo "Veuillez saisir un titre.";
     }
