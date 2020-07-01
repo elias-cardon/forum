@@ -33,8 +33,12 @@ if (isset($_POST["deconnexion"])) {
                     WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
+        $nb_sujets = mysqli_num_rows($query);
 
-        ?>
+        if ($nb_sujets == 0) {
+            echo 'Aucune catégorie';
+        }else{
+            ?>
         <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
@@ -65,7 +69,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id_categorie=','">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '<a href="message.php?id_topics= "'.$myid.'" >', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
@@ -77,14 +81,15 @@ if (isset($_POST["deconnexion"])) {
                     echo htmlentities(trim($datas[$key][2]));
 
                     echo '</td>';
-                    echo '</tr>';
-                ?>
-                <?php } ?>
+                    echo '</tr>'; ?>
+                <?php
+                } ?>
 
             </table>
             </div>
         </div>
         <?php
+        }
         mysqli_free_result($query);
         ?>
          <?php if(isset($_SESSION['login'])){
