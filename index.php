@@ -52,6 +52,7 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                     <th>
                         Titre du sujet
+                    
                     </th>
                     <th>
                         Date de création
@@ -93,7 +94,6 @@ if (isset($_POST["deconnexion"])) {
         if(!empty($titre)){
 
             //connexion à la bdd
-            echo "qqq";
             try {
                 $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
             }catch(PDOException $e){
