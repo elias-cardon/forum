@@ -34,8 +34,9 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-
-        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id ORDER BY date_heure DESC';
+        var_dump($_SESSION);
+        $login = $_SESSION['login'];
+        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
