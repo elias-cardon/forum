@@ -9,15 +9,16 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title> Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
+    
 </head>
 
 <body>
@@ -34,8 +35,7 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-
-        $sql = 'SELECT * FROM topics INNER JOIN utilisateurs ON topics.id = utilisateurs.id ORDER BY date_heure DESC';
+        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
@@ -45,6 +45,7 @@ if (isset($_POST["deconnexion"])) {
             echo 'Aucun sujet';
         } else {
             ?>
+            <div class="table-center">
             <table width="500" border="1">
                 <tr>
                     <th>
@@ -52,29 +53,31 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                     <th>
                         Titre du sujet
+                    
                     </th>
                     <th>
                         Date de création
                     </th>
                 </tr>
                 <?php
-                while ($data = mysqli_fetch_array($req)) {
+                $datas  = mysqli_fetch_all($req);
+                foreach ($datas as $key => $data) {
 
-                    sscanf($data['date_heure'], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                    sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 
                     echo '<tr>';
                     echo '<td>';
 
-                    echo htmlentities(trim($data['login']));
+                    echo htmlentities(trim($data[3]));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data['id']), '">', htmlentities(trim($data['titre'])), '</a>';
+                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
 
                     echo '</td><td>';
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
                 }
                 ?>
-                </td></tr></table>
+                </td></tr></table></div>
             <?php
         }
         mysqli_free_result($req);
@@ -85,7 +88,7 @@ if (isset($_POST["deconnexion"])) {
     <?php
 
     if(isset($_SESSION['login'])){
-
+        $login = $_SESSION['login'];
     if(isset($_POST['submit'])){
 
         //SECURE TITRE

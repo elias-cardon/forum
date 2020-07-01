@@ -27,15 +27,18 @@ if (isset($_POST["deconnexion"])) {
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
-        $myId = $_GET['id_topics'];
-        $requete = "SELECT categories.*, utilisateurs.*,topics.* 
-                    FROM categories 
-                    INNER JOIN utilisateurs ON categories.id_utilisateurs = utilisateurs.id
-                    INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myId";
+        $myid = $_GET['id_topics'];
+        $requete = "SELECT c.*, u.*,t.* 
+                    FROM categories as c, utilisateurs as u, topics as t
+                    WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
+        $nb_sujets = mysqli_num_rows($query);
 
-        ?>
+        if ($nb_sujets == 0) {
+            echo 'Aucune catégorie';
+        }else{
+            ?>
         <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
@@ -60,28 +63,33 @@ if (isset($_POST["deconnexion"])) {
                     echo '<tr>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][9]));
+
+
                     echo '</td>';
+                    echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id=2','">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo '<a href="message.php?id_topics= "'.$myid.'" >', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
-
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
-                    echo '</td>';
 
+
+
+                    echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][2]));
-                    echo '</td>';
-                    echo '</tr>';
 
-                ?>
-                <?php } ?>
+                    echo '</td>';
+                    echo '</tr>'; ?>
+                <?php
+                } ?>
 
             </table>
             </div>
         </div>
         <?php
+        }
         mysqli_free_result($query);
         ?>
          <?php if(isset($_SESSION['login'])){
@@ -99,23 +107,23 @@ if(isset($_POST['submit'])){
         }catch(PDOException $e){
             echo 'Erreur : ' . $e->getMessage();
         }
-        $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC');
+        $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC'); # Pourquoi order si c'est déjà ordonné dans l'index ? Pourquoi demander un login si l'admin est le seul a pouvoir ajouter des catégories.
         $prepare->execute([$_SESSION['login']]);
         $user = $prepare->fetch(PDO::FETCH_ASSOC);
         //inserer dans bdd  
         $insert = $bdd->prepare("INSERT INTO categories(id_topics, id_utilisateurs, titre, date_heure) 
                                 VALUES(:id_topics, :id_utilisateurs, :titre, CURTIME())");
-        $insert->execute(array('id_topics' => '1',
+        $insert->execute(array('id_topics' => $myid,
                             'id_utilisateurs' => (int)$user['id'], 
                             'titre' => $titre));
 
-        header("location:categorie.php");
+        header("location: categorie.php?id_topics=" . $myid);
 
     }else echo "Veuillez saisir un titre.";
 }
 ?>
 <div class="center_form_topic">
-<form id="form-add-topics" action="#" method="post">
+<form id="form-add-topics" action="categorie.php?id_topics=<?= $myid ?>" method="post">
 <h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
 <input class="button" type="submit" name="submit" value="POSTER">
