@@ -34,7 +34,6 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-        var_dump($_SESSION);
         $login = $_SESSION['login'];
         $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
