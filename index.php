@@ -117,7 +117,6 @@ if (isset($_POST["deconnexion"])) {
 <form id="form-add-topics" action="#" method="post">
 <h4 class="title-form">AJOUTER UN TOPIC ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
-<input type="text" name="titre" placeholder="Message">
 <input class="button" type="submit" name="submit" value="POSTER">
 </form>
 </div>
