@@ -9,13 +9,13 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title> Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
 </head>
@@ -45,6 +45,7 @@ if (isset($_POST["deconnexion"])) {
             echo 'Aucun sujet';
         } else {
             ?>
+            <div class="table-center">
             <table width="500" border="1">
                 <tr>
                     <th>
@@ -52,6 +53,7 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                     <th>
                         Titre du sujet
+                    
                     </th>
                     <th>
                         Date de création
@@ -74,7 +76,7 @@ if (isset($_POST["deconnexion"])) {
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
                 }
                 ?>
-                </td></tr></table>
+                </td></tr></table></div>
             <?php
         }
         mysqli_free_result($req);
@@ -93,7 +95,6 @@ if (isset($_POST["deconnexion"])) {
         if(!empty($titre)){
 
             //connexion à la bdd
-            echo "qqq";
             try {
                 $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
             }catch(PDOException $e){

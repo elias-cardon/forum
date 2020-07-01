@@ -34,7 +34,6 @@ if (isset($_POST["deconnexion"])) {
                     INNER JOIN topics ON categories.id_utilisateurs = topics.id_utilisateurs WHERE topics.id = $myId";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
-
         ?>
         <div class="center"> 
         <div class="table-center">
@@ -66,7 +65,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id=2','">', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo "<a href=\"message.php?id_topics=\"$myId\">", htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));
@@ -79,7 +78,6 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '</td>';
                     echo '</tr>';
-
                 ?>
                 <?php } ?>
 
@@ -104,7 +102,7 @@ if(isset($_POST['submit'])){
         }catch(PDOException $e){
             echo 'Erreur : ' . $e->getMessage();
         }
-        $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC');
+        $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC'); # Pourquoi order si c'est déjà ordonné dans l'index ? Pourquoi demander un login si l'admin est le seul a pouvoir ajouter des catégories.
         $prepare->execute([$_SESSION['login']]);
         $user = $prepare->fetch(PDO::FETCH_ASSOC);
         //inserer dans bdd  
@@ -118,7 +116,7 @@ if(isset($_POST['submit'])){
 }
 ?>
 <div class="center_form_topic">
-<form id="form-add-topics" action="#" method="post">
+<form id="form-add-topics" action="categorie.php" method="post">
 <h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
 <input class="button" type="submit" name="submit" value="POSTER">
