@@ -5,6 +5,7 @@ if (isset($_POST["deconnexion"])) {
     session_destroy();
     header('Location:index.php');
 }
+
 ?>
 
 <head>
@@ -88,6 +89,44 @@ if (isset($_POST["deconnexion"])) {
         <?php
         mysqli_free_result($query);
         ?>
+         <?php if(isset($_SESSION['login'])){
+
+if(isset($_POST['submit'])){
+
+    //SECURE TITRE
+    $titre = htmlspecialchars($_POST['titre']);
+
+    if(!empty($titre)){
+
+        //connexion à la bdd
+        try {
+            $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+        }catch(PDOException $e){
+            echo 'Erreur : ' . $e->getMessage();
+        }
+        $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC');
+        $prepare->execute([$_SESSION['login']]);
+        $user = $prepare->fetch(PDO::FETCH_ASSOC);
+        //inserer dans bdd  
+        $insert = $bdd->prepare("INSERT INTO categories(id_topics, id_utilisateurs, titre, date_heure) 
+                                VALUES(:id_topics, :id_utilisateurs, :titre, CURTIME())");
+        $insert->execute(array('id_topics' => '1',
+                            'id_utilisateurs' => (int)$user['id'], 
+                            'titre' => $titre));
+
+        header("location:categorie.php");
+
+    }else echo "Veuillez saisir un titre.";
+}
+?>
+<div class="center_form_topic">
+<form id="form-add-topics" action="#" method="post">
+<h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
+<input type="text" name="titre" placeholder="Saisir un titre">
+<input class="button" type="submit" name="submit" value="POSTER">
+</form>
+</div>
+<?php } ?>
         </div>
     </main>
     <footer>
