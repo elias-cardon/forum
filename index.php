@@ -34,7 +34,6 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-        var_dump($_SESSION);
         $login = $_SESSION['login'];
         $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
@@ -68,7 +67,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<tr>';
                     echo '<td>';
 
-                    echo htmlentities(trim($data[4]));
+                    echo htmlentities(trim($data[3]));
                     echo '</td><td>';
 
                     echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
