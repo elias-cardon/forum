@@ -23,13 +23,12 @@ if (isset($_POST["deconnexion"])) {
         <?php include("include/header.php") ?>
     </header>
     <main>
-
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
         $myid = $_GET['id_topics'];
-        $requete = "SELECT c.*, u.*,t.* 
-                    FROM categories as c, utilisateurs as u, topics as t
+        $requete = "SELECT c.*, u.*,t.*, m.*
+                    FROM categories as c, utilisateurs as u, topics as t, messages as m
                     WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
@@ -42,6 +41,7 @@ if (isset($_POST["deconnexion"])) {
         <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
+                <h3>Catégorie</h3>
                 <tr>
                     <th>
                         Titre topics
@@ -59,17 +59,20 @@ if (isset($_POST["deconnexion"])) {
                 <?php
 
 
-                foreach ($datas as $key => $data) {
+               foreach ($datas as $key => $data) {
                     echo '<tr>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][9]));
+
+                    var_dump($data);
 
 
                     echo '</td>';
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id_topics= "'.$myid.'" >', htmlentities(trim($datas[$key][3])), '</a>';
+
+                    echo "<a href='message.php?id_categorie=$myid'>", htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
                     echo htmlentities(trim($datas[$key][6]));

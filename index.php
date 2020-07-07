@@ -28,7 +28,9 @@ if (isset($_POST["deconnexion"])) {
 <main>
 <div class="bg-image"></div>
     <div id="banner">
-        <h2>BIENVENUE SUR LE FORUM</h2>
+        <div class="deco_title">
+            <h2>BIENVENUE SUR LE FORUM</h2>
+        </div>
 
         <br/><br/>
 
@@ -47,6 +49,7 @@ if (isset($_POST["deconnexion"])) {
             ?>
             <div class="table-center">
             <table width="500" border="1">
+                <h3>Topics</h3>
                 <tr>
                     <th>
                         Auteur

@@ -25,14 +25,15 @@ if (isset($_POST["deconnexion"])) {
     <main>
 
         <?php
+        $link = mysqli_connect("localhost", "root", "", "forum");
 
-        $bdd = mysqli_connect("localhost", "root", "", "forum");
+
         $myid = $_GET['id_topics'];
-        $requete = "SELECT c.*, u.*,t.* 
-                    FROM categories as c, utilisateurs as u, topics as t
-                    WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
-        $query = mysqli_query($bdd, $requete);
-        $datas = mysqli_fetch_all($query);
+
+
+        $requete = "SELECT topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
+        $query = mysqli_query($link, $requete);
+        $results = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
         ?>
         <div class="center"> 
@@ -49,34 +50,38 @@ if (isset($_POST["deconnexion"])) {
                         Login
                     </th>
                     <th>
+                        Contenu
+                    </th>
+                    <th>
                         Date, heure de poste
                     </th>
                 </tr>
                 <?php
 
 
-                foreach ($datas as $key => $data) {
+                foreach ($results as $key => $data) {
                     echo '<tr>';
+
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][9]));
-
-
+                    echo htmlentities(trim($data['topics_titre']));
                     echo '</td>';
+
                     echo '<td>';
-
-                    // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id_topics= "'.$myid.'" >', htmlentities(trim($datas[$key][3])), '</a>';
+                    echo htmlentities(trim($data['categories_titre']));
                     echo '</td>';
+
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][6]));
-
-
-
+                    echo '<a href="message.php?id_topics= "'.$myid.'" >', htmlentities(trim($data['login'])), '</a>';
                     echo '</td>';
+
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][2]));
-
+                    echo htmlentities(trim($data['contenu']));
                     echo '</td>';
+
+                    echo '<td>';
+                    echo  htmlentities(trim($data['date_heure']));
+                    echo '</td>';
+
                     echo '</tr>';
                 ?>
                 <?php } ?>
@@ -117,6 +122,7 @@ if(isset($_POST['submit'])){
     }else echo "Veuillez saisir un titre.";
 }
 ?>
+
 <div class="center_form_topic">
 <form id="form-add-topics" action="categorie.php?id_topics=<?= $myid ?>" method="post">
 <h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
