@@ -111,21 +111,21 @@ if(isset($_POST['submit'])){
         $prepare->execute([$_SESSION['login']]);
         $user = $prepare->fetch(PDO::FETCH_ASSOC);
         //inserer dans bdd  
-        $insert = $bdd->prepare("INSERT INTO categories(id_topics, id_utilisateurs, titre, date_heure) 
-                                VALUES(:id_topics, :id_utilisateurs, :titre, CURTIME())");
+        $insert = $bdd->prepare("INSERT INTO messages(id_categorie, id_utilisateurs, date_heure, contenu) 
+                                VALUES(:id_topics, :id_utilisateurs, CURTIME(), :contenu)");
         $insert->execute(array('id_topics' => $myid,
                             'id_utilisateurs' => (int)$user['id'], 
-                            'titre' => $titre));
+                            'contenu' => $titre));
 
-        header("location: categorie.php?id_topics=" . $myid);
+        header("location: message.php?id_topics=" . $myid);
 
     }else echo "Veuillez saisir un titre.";
 }
 ?>
 
 <div class="center_form_topic">
-<form id="form-add-topics" action="categorie.php?id_topics=<?= $myid ?>" method="post">
-<h4 class="title-form">AJOUTER UNE CATEGORIE ICI !</h4>
+<form id="form-add-topics" action="message.php?id_topics=<?= $myid ?>" method="post">
+<h4 class="title-form">AJOUTER UN MESSAGE ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
 <input class="button" type="submit" name="submit" value="POSTER">
 </form>
