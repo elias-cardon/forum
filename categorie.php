@@ -27,9 +27,7 @@ if (isset($_POST["deconnexion"])) {
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
         $myid = $_GET['id_topics'];
-        $requete = "SELECT c.*, u.*,t.*, m.*
-                    FROM categories as c, utilisateurs as u, topics as t, messages as m
-                    WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
+        $requete = "SELECT * FROM categories JOIN topics ON categories.id_topics=topics.id JOIN utilisateurs ON categories.id_utilisateurs=utilisateurs.id";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
         $nb_sujets = mysqli_num_rows($query);
@@ -62,7 +60,7 @@ if (isset($_POST["deconnexion"])) {
                foreach ($datas as $key => $data) {
                     echo '<tr>';
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][9]));
+                    echo htmlentities(trim($datas[$key][6]));
 
                    
 
@@ -74,7 +72,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<a href="message.php?id_categorie=', htmlspecialchars($data[0]), '">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][6]));
+                    echo htmlentities(trim($datas[$key][11]));
 
 
 

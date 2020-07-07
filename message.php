@@ -28,7 +28,7 @@ if (isset($_POST["deconnexion"])) {
         $link = mysqli_connect("localhost", "root", "", "forum");
 
 
-        $myid = $_GET['id_topics'];
+        $myid = $_GET['id_categorie'];
 
 
         $requete = "SELECT topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
@@ -117,14 +117,14 @@ if(isset($_POST['submit'])){
                             'id_utilisateurs' => (int)$user['id'], 
                             'contenu' => $titre));
 
-        header("location: message.php?id_topics=" . $myid);
+        header("location: message.php?id_categorie=" . $myid);
 
     }else echo "Veuillez saisir un titre.";
 }
 ?>
 
 <div class="center_form_topic">
-<form id="form-add-topics" action="message.php?id_topics=<?= $myid ?>" method="post">
+<form id="form-add-topics" action="message.php?id_categorie=<?= $myid ?>" method="post">
 <h4 class="title-form">AJOUTER UN MESSAGE ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
 <input class="button" type="submit" name="submit" value="POSTER">
