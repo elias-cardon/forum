@@ -72,7 +72,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '<a href="message.php?id_categorie=', htmlspecialchars($data[0]), '">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][11]));
+                    echo htmlentities(trim($datas[$key][12]));
 
 
 

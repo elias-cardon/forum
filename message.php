@@ -71,7 +71,7 @@ if (isset($_POST["deconnexion"])) {
                     echo '</td>';
 
                     echo '<td>';
-                    echo '<a href="message.php?id_topics= "'.$myid.'" >', htmlentities(trim($data['login'])), '</a>';
+                    echo htmlentities(trim($data['login']));
                     echo '</td>';
 
                     echo '<td>';
