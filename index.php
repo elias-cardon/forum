@@ -37,6 +37,7 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
+        $login = $_SESSION['login'];
         $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
@@ -64,17 +65,6 @@ if (isset($_POST["deconnexion"])) {
                 </tr>
                 <?php
                 $datas  = mysqli_fetch_all($req);
-                foreach ($datas as $key => $data) {
-
-                      //connexion à la bdd pdo
-                    try {
-                        $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
-                    } catch (PDOException $e) {
-                        echo 'Erreur : ' . $e->getMessage();
-                    }
-
-                    $visibilite = $bdd->query("SELECT visibilite FROM topics JOIN utilisateurs ON topics.id_utilisateurs = utilisateurs.id WHERE visibilite = 1");
-                    $result = $visibilite->fetch(PDO::FETCH_ASSOC);
                             foreach ($datas as $key => $data) {
                                     sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
                                 
@@ -82,8 +72,8 @@ if (isset($_POST["deconnexion"])) {
                                 echo '<tr>';
                                 echo '<td>';
 
-                                echo htmlentities(trim($data[3]));
-                                echo '</td><td>';
+                    echo htmlentities(trim($data[3]));
+                    echo '</td><td>';
 
                                 echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
 
@@ -92,7 +82,7 @@ if (isset($_POST["deconnexion"])) {
                             }
                         
                     
-                }
+                
                 ?>
                 </td></tr></table></div>
             <?php

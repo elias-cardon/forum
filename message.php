@@ -57,8 +57,6 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                 </tr>
                 <?php
-
-
                 foreach ($results as $key => $data) {
                     echo '<tr>';
 
