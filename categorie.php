@@ -23,21 +23,23 @@ if (isset($_POST["deconnexion"])) {
         <?php include("include/header.php") ?>
     </header>
     <main>
-
         <?php
 
         $bdd = mysqli_connect("localhost", "root", "", "forum");
         $myid = $_GET['id_topics'];
-        $requete = "SELECT c.*, u.*,t.* 
-                    FROM categories as c, utilisateurs as u, topics as t
-                    WHERE c.id_utilisateurs = u.id AND t.id = c.id_topics  AND t.id = $myid";
+        $requete = "SELECT * FROM categories JOIN topics ON categories.id_topics=topics.id JOIN utilisateurs ON categories.id_utilisateurs=utilisateurs.id";
         $query = mysqli_query($bdd, $requete);
         $datas = mysqli_fetch_all($query);
+        $nb_sujets = mysqli_num_rows($query);
 
-        ?>
+        if ($nb_sujets == 0) {
+            echo 'Aucune catégorie';
+        }else{
+            ?>
         <div class="center"> 
         <div class="table-center">
             <table width="500" border="1">
+                <h3>Catégorie</h3>
                 <tr>
                     <th>
                         Titre topics
@@ -55,20 +57,22 @@ if (isset($_POST["deconnexion"])) {
                 <?php
 
 
-                foreach ($datas as $key => $data) {
+               foreach ($datas as $key => $data) {
                     echo '<tr>';
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][9]));
+                    echo htmlentities(trim($datas[$key][6]));
 
+                   
 
                     echo '</td>';
                     echo '<td>';
 
                     // echo htmlentities(trim($datas[$key][2]));
-                    echo '<a href="message.php?id_categorie=','">', htmlentities(trim($datas[$key][3])), '</a>';
+
+                    echo '<a href="message.php?id_categorie=', htmlspecialchars($data[0]), '">', htmlentities(trim($datas[$key][3])), '</a>';
                     echo '</td>';
                     echo '<td>';
-                    echo htmlentities(trim($datas[$key][6]));
+                    echo htmlentities(trim($datas[$key][12]));
 
 
 
@@ -77,15 +81,15 @@ if (isset($_POST["deconnexion"])) {
                     echo htmlentities(trim($datas[$key][2]));
 
                     echo '</td>';
-                    echo '</tr>';
-
-                ?>
-                <?php } ?>
+                    echo '</tr>'; ?>
+                <?php
+                } ?>
 
             </table>
             </div>
         </div>
         <?php
+        }
         mysqli_free_result($query);
         ?>
          <?php if(isset($_SESSION['login'])){

@@ -9,15 +9,16 @@ if (isset($_POST["deconnexion"])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title> Le Bon Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes"/>
     <script src="https://kit.fontawesome.com/5a25ce672a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
     <link rel="shortcut icon" href="favicon/gamepad.png" type="image/x-icon">
+    
 </head>
 
 <body>
@@ -27,14 +28,15 @@ if (isset($_POST["deconnexion"])) {
 <main>
 <div class="bg-image"></div>
     <div id="banner">
-        <h2>BIENVENUE SUR LE FORUM</h2>
+        <div class="deco_title">
+            <h2>BIENVENUE SUR LE FORUM</h2>
+        </div>
 
         <br/><br/>
 
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-        $login = $_SESSION['login'];
         $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
@@ -45,7 +47,9 @@ if (isset($_POST["deconnexion"])) {
             echo 'Aucun sujet';
         } else {
             ?>
+            <div class="table-center">
             <table width="500" border="1">
+                <h3>Topics</h3>
                 <tr>
                     <th>
                         Auteur
@@ -76,7 +80,7 @@ if (isset($_POST["deconnexion"])) {
                     echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
                 }
                 ?>
-                </td></tr></table>
+                </td></tr></table></div>
             <?php
         }
         mysqli_free_result($req);
@@ -87,6 +91,7 @@ if (isset($_POST["deconnexion"])) {
     <?php
 
     if(isset($_SESSION['login'])){
+        $login = $_SESSION['login'];
     if(isset($_POST['submit'])){
 
         //SECURE TITRE

@@ -13,9 +13,9 @@ if (isset($_POST["deconnexion"])) {
 if (isset($_SESSION['login'])) {
     $username = $_SESSION['login'];
     if (isset($_POST['submit'])) {
-        $login = $_POST['login'];
-        $newlogin = $_POST['newlogin'];
-        $repeatnewlogin = $_POST['repeatnewlogin'];
+        $login = htmlspecialchars($_POST['login']);
+        $newlogin = htmlspecialchars($_POST['newlogin']);
+        $repeatnewlogin = htmlspecialchars($_POST['repeatnewlogin']);
         if ($login && $newlogin && $repeatnewlogin) {
             if ($newlogin == $repeatnewlogin) {
                 $db = mysqli_connect('localhost', 'root', '') or die('Erreur');
