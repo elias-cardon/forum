@@ -37,6 +37,7 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
+        $login = $_SESSION['login'];
         $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
@@ -64,21 +65,24 @@ if (isset($_POST["deconnexion"])) {
                 </tr>
                 <?php
                 $datas  = mysqli_fetch_all($req);
-                foreach ($datas as $key => $data) {
+                            foreach ($datas as $key => $data) {
+                                    sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                                
 
-                    sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
-
-                    echo '<tr>';
-                    echo '<td>';
+                                echo '<tr>';
+                                echo '<td>';
 
                     echo htmlentities(trim($data[3]));
                     echo '</td><td>';
 
-                    echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
+                                echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
 
-                    echo '</td><td>';
-                    echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
-                }
+                                echo '</td><td>';
+                                echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+                            }
+                        
+                    
+                
                 ?>
                 </td></tr></table></div>
             <?php
@@ -109,11 +113,12 @@ if (isset($_POST["deconnexion"])) {
             $prepare->execute([$_SESSION['login']]);
             $user = $prepare->fetch(PDO::FETCH_ASSOC);
             //inserer dans bdd  
-            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure, login)
-                                    VALUES(:id_utilisateurs, :titre, CURTIME(), :login)");
+            $insert = $bdd->prepare("INSERT INTO topics(id_utilisateurs, titre, date_heure, login,visibilite)
+                                    VALUES(:id_utilisateurs, :titre, CURTIME(), :login, :visibilite)");
             $insert->execute(array('id_utilisateurs' => (int)$user['id'], 
                                 'titre' => $titre,
-                                'login' => $_SESSION['login']));
+                                'login' => $_SESSION['login'],
+                                'visibilite' => $_POST['visibilite']));
 
             header("location:index.php");
 
@@ -124,6 +129,12 @@ if (isset($_POST["deconnexion"])) {
 <form id="form-add-topics" action="#" method="post">
 <h4 class="title-form">AJOUTER UN TOPIC ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
+<div class="row">
+<label for="1">Privée:</label>
+<input type="radio" name="visibilite" value="1">
+<label for="0">Public:</label>
+<input type="radio" name="visibilite" value="0">
+</div>
 <input class="button" type="submit" name="submit" value="POSTER">
 </form>
 </div>
