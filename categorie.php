@@ -51,7 +51,7 @@ if (isset($_POST["deconnexion"])) {
                         Login
                     </th>
                     <th>
-                        Date, heure de poste
+                        Date et heure de poste
                     </th>
                 </tr>
                 <?php
