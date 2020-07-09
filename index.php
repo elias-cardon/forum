@@ -76,30 +76,58 @@ if (isset($_POST["deconnexion"])) {
                 }
                 $recup_visibilite = $bdd->query("SELECT visibilite FROM topics");
 
-                $recup_visibilite->fetchAll();
-
-                if($recup_visibilite === 1 && $_SESSION['login'] === 'admin') {
-                    $datas  = mysqli_fetch_all($req);
-                    foreach ($datas as $key => $data) {
-                        sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                $fetch_visiblite = $recup_visibilite->fetchAll(PDO::FETCH_ASSOC);
+                //var_dump($fetch_visiblite);
+                //echo 'test';
+                
+                    foreach ($fetch_visiblite as $key => $visibilite) {
+                        //var_dump($visibilite['visibilite']);
+                        if ($visibilite['visibilite'] == '0') {
+                            $datas  = mysqli_fetch_all($req);
+                            foreach ($datas as $key => $data) {
+                                sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
                                 
 
-                        echo '<tr>';
-                        echo '<td>';
+                                echo '<tr>';
+                                echo '<td>';
 
-                        echo htmlentities(trim($data[3]));
-                        echo '</td><td>';
+                                echo htmlentities(trim($data[3]));
+                                echo '</td><td>';
 
-                        echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
+                                echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
 
-                        echo '</td><td>';
-                        echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+                                echo '</td><td>';
+                                echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
 
-                        echo '</td><td>';
+                                if ($_SESSION['login'] == 'admin') { 
+                                echo '</td><td>
+                        <form action="#" method="post">
+                                    <label for="1">Privée:</label>
+                                    <input type="radio" name="newVisibilite" value="1">
+                                    <label for="0">Public:</label>
+                                    <input type="radio" name="newVisibilite" value="0">
+                                    <input class="button" type="submit" name="submit_visibilite" value="POSTER">
+                                </form>';
+                            }
+                        }
                     }
                 }
+                            var_dump($_POST);
+                            if(isset($_POST['newVisibilite']) && isset($_POST['submit_visibilite'])){
+                                echo 'MAJ VISIBILITE';
+                                try {
+                                    $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+                                }catch(PDOException $e){
+                                    echo 'Erreur : ' . $e->getMessage();
+                                }
+                                $newVisibilite = htmlspecialchars($_POST['newVisibilite']);
 
-                            if($recup_visibilite === 0){
+                                $visibilite_modif = $bdd->prepare("UPDATE topics SET visibilite=?");
+                                $visibilite_modif->execute([$newVisibilite]);
+                            }
+
+
+                            if($fetch_visiblite === 0){
 
                             $datas  = mysqli_fetch_all($req);
                             foreach ($datas as $key => $data) {
@@ -135,6 +163,7 @@ if (isset($_POST["deconnexion"])) {
                                 <?php 
                             //traitement du form
                             if(isset($_POST['visiblite']) && isset($_POST['submit_visibilite'])){
+                                echo 'MAJ VISIBILITE';
                                 try {
                                     $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
                                 }catch(PDOException $e){
