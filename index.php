@@ -37,8 +37,7 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-        $login = $_SESSION['login'];
-        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC";
+        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC LIMIT 3 ";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
@@ -62,28 +61,102 @@ if (isset($_POST["deconnexion"])) {
                     <th>
                         Date de création
                     </th>
+        <?php if($_SESSION['login'] === 'admin') { ?>
+                    <th>
+                       Visibilité
+                    </th>
+        <?php } ?>
                 </tr>
                 <?php
-                $datas  = mysqli_fetch_all($req);
+                //recuperer la visibilité du topic
+                try {
+                    $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+                }catch(PDOException $e){
+                    echo 'Erreur : ' . $e->getMessage();
+                }
+                $recup_visibilite = $bdd->query("SELECT visibilite FROM topics");
+
+                $recup_visibilite->fetchAll();
+
+                if($recup_visibilite === 1 && $_SESSION['login'] === 'admin') {
+                    $datas  = mysqli_fetch_all($req);
+                    foreach ($datas as $key => $data) {
+                        sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                                
+
+                        echo '<tr>';
+                        echo '<td>';
+
+                        echo htmlentities(trim($data[3]));
+                        echo '</td><td>';
+
+                        echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
+
+                        echo '</td><td>';
+                        echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+
+                        echo '</td><td>';
+                    }
+                }
+
+                            if($recup_visibilite === 0){
+
+                            $datas  = mysqli_fetch_all($req);
                             foreach ($datas as $key => $data) {
-                                    sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+                                sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
                                 
 
                                 echo '<tr>';
                                 echo '<td>';
 
-                    echo htmlentities(trim($data[3]));
-                    echo '</td><td>';
+                                echo htmlentities(trim($data[3]));
+                                echo '</td><td>';
 
                                 echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
 
                                 echo '</td><td>';
                                 echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+
+                                echo '</td><td>';
                             }
+                                ?>
+
+                                <?php 
+                                
+                                if($_SESSION['login'] === 'admin'){?>
+                                <form action="#" method="post">
+                                    <label for="1">Privée:</label>
+                                    <input type="radio" name="newVisibilite" value="1">
+                                    <label for="0">Public:</label>
+                                    <input type="radio" name="newVisibilite" value="0">
+                                    <input class="button" type="submit" name="submit_visibilite" value="POSTER">
+                                </form>
+
+                                <?php 
+                            //traitement du form
+                            if(isset($_POST['visiblite']) && isset($_POST['submit_visibilite'])){
+                                try {
+                                    $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+                                }catch(PDOException $e){
+                                    echo 'Erreur : ' . $e->getMessage();
+                                }
+                                $newVisibilite = htmlspecialchars($_POST['newVisibilite']);
+
+                                $visibilite_modif = $bdd->prepare("UPDATE topics SET visibilite=?");
+                                $visibilite_modif->execute([[$newVisibilite]]);
+                            }
+
+                            
+                            
+                            } ?>
+
+                               <?php echo '</td></tr>';
+
+                            }?>
                         
                     
                 
-                ?>
+                
                 </td></tr></table></div>
             <?php
         }
@@ -124,21 +197,28 @@ if (isset($_POST["deconnexion"])) {
 
         }else echo "Veuillez saisir un titre.";
     }
+
+    if($_SESSION['login'] === 'admin' || $_SESSION['login'] === 'moderateur'){
     ?>
     <div class="center_form_topic">
 <form id="form-add-topics" action="#" method="post">
 <h4 class="title-form">AJOUTER UN TOPIC ICI !</h4>
 <input type="text" name="titre" placeholder="Saisir un titre">
-<div class="row">
+
+<?php if($_SESSION['login'] === 'admin'){ ?>
 <label for="1">Privée:</label>
 <input type="radio" name="visibilite" value="1">
 <label for="0">Public:</label>
 <input type="radio" name="visibilite" value="0">
-</div>
+<?php } ?>
+
 <input class="button" type="submit" name="submit" value="POSTER">
+
+
 </form>
 </div>
-   <?php } ?>
+<?php }
+} ?>
 
 
 </main>

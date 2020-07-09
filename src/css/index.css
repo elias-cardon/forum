@@ -139,6 +139,7 @@ input {
     
 }
 input[type=submit]{
+    display: block;
     width: 20%;
     cursor: pointer;
     margin-bottom: 30px;
