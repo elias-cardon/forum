@@ -77,11 +77,9 @@ if (isset($_POST["deconnexion"])) {
                     $recup_visibilite = $bdd->query("SELECT visibilite FROM topics");
 
                     $fetch_visiblite = $recup_visibilite->fetchAll(PDO::FETCH_ASSOC);
-                    //var_dump($fetch_visiblite);
                     //echo 'test';
 
                     foreach ($fetch_visiblite as $key => $visibilite) {
-                        //var_dump($visibilite['visibilite']);
                         if ($visibilite['visibilite'] == '0') {
                             $datas  = mysqli_fetch_all($req);
                             foreach ($datas as $key => $data) {
@@ -112,7 +110,6 @@ if (isset($_POST["deconnexion"])) {
                             }
                         }
                     }
-                    var_dump($_POST);
                     if(isset($_POST['newVisibilite']) && isset($_POST['submit_visibilite'])){
                         echo 'MAJ VISIBILITE';
                         try {
