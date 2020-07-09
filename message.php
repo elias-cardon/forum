@@ -59,9 +59,6 @@ if (isset($_POST["deconnexion"])) {
                         Like / Dislike
                     </th>
                 </tr>
-                <tr>
-                
-
 
                 <?php
                 foreach ($results as $key => $data) {
