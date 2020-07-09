@@ -207,7 +207,22 @@ th{
     background-color: #ffa8B6;
     color:#edf7F6;
 }
+/****MESSAGE***/
+.vote_btn {
 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+i {
+
+    color: rgb(204, 204, 204);
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+
+
+}
 /****FOOTER***/
 footer{
     display: flex;
