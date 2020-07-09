@@ -89,8 +89,8 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '<td>';
                     echo '<div class="vote_btn">
-                    <div class="vote_like"><i class="fas fa-thumbs-up"></i> 20 </div>
-                    <div class="vote_like"><i class="fas fa-thumbs-down"></i> 5 </div>';
+                    <button class="vote_like"><i class="fas fa-thumbs-up"></i> 55</button>
+                    <button class="vote_dislike"><i class="fas fa-thumbs-down"></i> 5</button>';
                     echo '</td>';
 
                     echo '</tr>';
