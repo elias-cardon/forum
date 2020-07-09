@@ -237,7 +237,6 @@ if (isset($_POST["deconnexion"])) {
                         <label for="0">Public:</label>
                         <input type="radio" name="visibilite" value="0">
                     <?php } ?>
-
                     <input class="button" type="submit" name="submit" value="POSTER">
 
 
