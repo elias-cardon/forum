@@ -112,9 +112,8 @@ if (isset($_POST["deconnexion"])) {
                         }
                     }
                 }
-                            var_dump($_POST);
                             if(isset($_POST['newVisibilite']) && isset($_POST['submit_visibilite'])){
-                                echo 'MAJ VISIBILITE';
+                                
                                 try {
                                     $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
                                 }catch(PDOException $e){
@@ -122,7 +121,7 @@ if (isset($_POST["deconnexion"])) {
                                 }
                                 $newVisibilite = htmlspecialchars($_POST['newVisibilite']);
 
-                                $visibilite_modif = $bdd->prepare("UPDATE topics SET visibilite=?");
+                                $visibilite_modif = $bdd->prepare("UPDATE topics SET visibilite=? WHERE id=id");
                                 $visibilite_modif->execute([$newVisibilite]);
                             }
 
@@ -221,8 +220,6 @@ if (isset($_POST["deconnexion"])) {
                                 'titre' => $titre,
                                 'login' => $_SESSION['login'],
                                 'visibilite' => $_POST['visibilite']));
-
-            header("location:index.php");
 
         }else echo "Veuillez saisir un titre.";
     }
