@@ -30,10 +30,21 @@ if (isset($_POST["deconnexion"])) {
 
         $myid = $_GET['id_categorie'];
 
-
         $requete = "SELECT topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
         $query = mysqli_query($link, $requete);
         $results = mysqli_fetch_all($query, MYSQLI_ASSOC);
+        
+        if(isset($_GET['id'])){
+        try {
+            $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+        }catch(PDOException $e){
+            echo 'Erreur : ' . $e->getMessage();
+        }
+        $req = $bdd->prepare("SELECT * FROM messages WHERE id= ?");
+        $req-> execute([$_GET['id']]);
+        $post = $req->fetch();
+
+    }
 
         ?>
         <div class="center"> 
@@ -89,8 +100,8 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '<td>';
                     echo '<div class="vote_btn">
-                    <button class="vote_like"><i class="fas fa-thumbs-up"></i> 55</button>
-                    <button class="vote_dislike"><i class="fas fa-thumbs-down"></i> 5</button>';
+                    <button class="vote_like"><i class="fas fa-thumbs-up"></i> <?=$post->like_count <?</button>
+                    <button class="vote_dislike"><i class="fas fa-thumbs-down"></i> <?=$post->dislike_count <?</button>';
                     echo '</td>';
 
                     echo '</tr>';

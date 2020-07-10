@@ -240,11 +240,13 @@ th{
 .vote_like:hover {
 
     color: rgb(6, 231, 6);
+    border-style: outset;
 }
 
 .vote_dislike:hover {
 
     color: rgb(221, 59, 37);
+    border: none;
 }
 
 /****FOOTER***/
