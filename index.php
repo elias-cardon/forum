@@ -61,7 +61,7 @@ if (isset($_POST["deconnexion"])) {
                         <th>
                             Date de création
                         </th>
-                        <?php if($_SESSION['login'] === 'admin') { ?>
+                        <?php if(isset($_SESSION['login']) === 'admin') { ?>
                             <th>
                                 Visibilité
                             </th>
