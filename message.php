@@ -145,4 +145,5 @@ if(isset($_POST['submit'])){
         <?php include("include/footer.php") ?>
     </footer>
 </body>
+</body>
 </html>
