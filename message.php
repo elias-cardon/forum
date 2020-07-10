@@ -55,7 +55,14 @@ if (isset($_POST["deconnexion"])) {
                     <th>
                         Date, heure de poste
                     </th>
+                    <th>
+                        Like / Dislike
+                    </th>
                 </tr>
+                <tr>
+                
+
+
                 <?php
                 foreach ($results as $key => $data) {
                     echo '<tr>';
@@ -78,6 +85,12 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '<td>';
                     echo  htmlentities(trim($data['date_heure']));
+                    echo '</td>';
+
+                    echo '<td>';
+                    echo '<div class="vote_btn">
+                    <button class="vote_like"><i class="fas fa-thumbs-up"></i> 55</button>
+                    <button class="vote_dislike"><i class="fas fa-thumbs-down"></i> 5</button>';
                     echo '</td>';
 
                     echo '</tr>';

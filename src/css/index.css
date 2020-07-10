@@ -147,10 +147,10 @@ input[type=submit]{
 i {
 
     text-align: center;
-    color: #edf7F6;
+    color: #dddddd;
     cursor: pointer;
-    font-size: 33px;
-    margin: 4px;
+    font-size: 30px;
+    margin-left: 25px;
     transition: 0.3s;
 
 }
@@ -206,6 +206,45 @@ table th{
 th{
     background-color: #ffa8B6;
     color:#edf7F6;
+}
+/****MESSAGE***/
+.vote_btn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: none;
+    padding : 0px;
+    background: transparent;
+    
+}
+
+.vote_like {
+
+    border: none;
+    padding : 0px;
+    background: transparent;
+    transition: color 0.3;
+    font-size: 17px;
+}
+
+.vote_dislike {
+
+    border: none;
+    padding : 0px;
+    background: transparent;
+    transition: color 0.3;
+    font-size: 17px;
+}
+
+.vote_like:hover {
+
+    color: rgb(6, 231, 6);
+}
+
+.vote_dislike:hover {
+
+    color: rgb(221, 59, 37);
 }
 
 /****FOOTER***/
