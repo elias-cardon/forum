@@ -61,7 +61,7 @@ if (isset($_POST["deconnexion"])) {
                         <th>
                             Date de création
                         </th>
-                        <?php if($_SESSION['login'] === 'admin') { ?>
+                        <?php if(isset($_SESSION['login']) === 'admin') { ?>
                             <th>
                                 Visibilité
                             </th>
@@ -97,7 +97,7 @@ if (isset($_POST["deconnexion"])) {
                                 echo '</td><td>';
                                 echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
 
-                                if ($_SESSION['login'] == 'admin') {
+                                if (isset($_SESSION['login']) == 'admin') {
                                     echo '</td><td>
                         <form action="#" method="post">
                                     <label for="1">Privée:</label>
@@ -148,7 +148,7 @@ if (isset($_POST["deconnexion"])) {
 
                         <?php
 
-                        if($_SESSION['login'] === 'admin'){?>
+                        if(isset($_SESSION['login']) === 'admin'){?>
                             <form action="#" method="post">
                                 <label for="1">Privée:</label>
                                 <input type="radio" name="newVisibilite" value="1">
@@ -224,7 +224,7 @@ if (isset($_POST["deconnexion"])) {
             }else echo "Veuillez saisir un titre.";
         }
 
-        if($_SESSION['login'] === 'admin' || $_SESSION['login'] === 'moderateur'){
+        if(isset($_SESSION['login']) === 'admin' || isset($_SESSION['login']) === 'moderateur'){
             ?>
             <div class="center_form_topic">
                 <form id="form-add-topics" action="#" method="post">
