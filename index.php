@@ -148,7 +148,7 @@ if (isset($_POST["deconnexion"])) {
 
                         <?php
 
-                        if($_SESSION['login'] === 'admin'){?>
+                        if(isset($_SESSION['login']) === 'admin'){?>
                             <form action="#" method="post">
                                 <label for="1">Privée:</label>
                                 <input type="radio" name="newVisibilite" value="1">
