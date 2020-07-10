@@ -61,7 +61,7 @@ if (isset($_POST["deconnexion"])) {
                         <th>
                             Date de création
                         </th>
-                        <?php if(isset($_SESSION['login']) === 'admin') { ?>
+                        <?php if($_SESSION['login'] === 'admin') { ?>
                             <th>
                                 Visibilité
                             </th>
@@ -97,7 +97,7 @@ if (isset($_POST["deconnexion"])) {
                                 echo '</td><td>';
                                 echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
 
-                                if (isset($_SESSION['login']) == 'admin') {
+                                if ($_SESSION['login'] == 'admin') {
                                     echo '</td><td>
                         <form action="#" method="post">
                                     <label for="1">Privée:</label>
@@ -148,7 +148,7 @@ if (isset($_POST["deconnexion"])) {
 
                         <?php
 
-                        if(isset($_SESSION['login']) === 'admin'){?>
+                        if($_SESSION['login'] === 'admin'){?>
                             <form action="#" method="post">
                                 <label for="1">Privée:</label>
                                 <input type="radio" name="newVisibilite" value="1">
@@ -237,6 +237,7 @@ if (isset($_POST["deconnexion"])) {
                         <label for="0">Public:</label>
                         <input type="radio" name="visibilite" value="0">
                     <?php } ?>
+
                     <input class="button" type="submit" name="submit" value="POSTER">
 
 
