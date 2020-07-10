@@ -37,7 +37,7 @@ if (isset($_POST["deconnexion"])) {
         <?php
         $bdd = mysqli_connect('localhost', 'root', '');
         mysqli_select_db($bdd, 'forum');
-        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC ";
+        $sql = "SELECT t.*, u.* FROM topics as t, utilisateurs as u WHERE t.id_utilisateurs = u.id  ORDER BY t.date_heure DESC LIMIT 3 ";
 
         $req = mysqli_query($bdd, $sql) or die('Erreur SQL !<br />' . $sql . '<br />');
 
@@ -61,7 +61,7 @@ if (isset($_POST["deconnexion"])) {
                         <th>
                             Date de création
                         </th>
-                        <?php if(isset($_SESSION['login']) === 'admin') { ?>
+                        <?php if($_SESSION['login'] === 'admin') { ?>
                             <th>
                                 Visibilité
                             </th>
@@ -97,7 +97,7 @@ if (isset($_POST["deconnexion"])) {
                                 echo '</td><td>';
                                 echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
 
-                                if (isset($_SESSION['login']) == 'admin') {
+                                if ($_SESSION['login'] == 'admin') {
                                     echo '</td><td>
                         <form action="#" method="post">
                                     <label for="1">Privée:</label>
@@ -121,11 +121,34 @@ if (isset($_POST["deconnexion"])) {
 
                         $visibilite_modif = $bdd->prepare("UPDATE topics SET visibilite=?");
                         $visibilite_modif->execute([$newVisibilite]);
-                    } ?>
+                    }
+
+
+                    if($fetch_visiblite === 0){
+
+                        $datas  = mysqli_fetch_all($req);
+                        foreach ($datas as $key => $data) {
+                            sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
+
+
+                            echo '<tr>';
+                            echo '<td>';
+
+                            echo htmlentities(trim($data[3]));
+                            echo '</td><td>';
+
+                            echo '<a href="categorie.php?id_topics=', htmlspecialchars($data[0]), '">', htmlentities(trim($data[1])), '</a>';
+
+                            echo '</td><td>';
+                            echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
+
+                            echo '</td><td>';
+                        }
+                        ?>
 
                         <?php
 
-                        if (isset($_SESSION['login']) === 'admin') {?>
+                        if($_SESSION['login'] === 'admin'){?>
                             <form action="#" method="post">
                                 <label for="1">Privée:</label>
                                 <input type="radio" name="newVisibilite" value="1">
@@ -136,11 +159,11 @@ if (isset($_POST["deconnexion"])) {
 
                             <?php
                             //traitement du form
-                            if (isset($_POST['visiblite']) && isset($_POST['submit_visibilite'])) {
+                            if(isset($_POST['visiblite']) && isset($_POST['submit_visibilite'])){
                                 echo 'MAJ VISIBILITE';
                                 try {
                                     $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
-                                } catch (PDOException $e) {
+                                }catch(PDOException $e){
                                     echo 'Erreur : ' . $e->getMessage();
                                 }
                                 $newVisibilite = htmlspecialchars($_POST['newVisibilite']);
@@ -153,7 +176,9 @@ if (isset($_POST["deconnexion"])) {
 
                         } ?>
 
-                        <?php echo '</td></tr>';?>
+                        <?php echo '</td></tr>';
+
+                    }?>
 
 
 
