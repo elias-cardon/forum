@@ -80,9 +80,11 @@ if (isset($_POST["deconnexion"])) {
                     //echo 'test';
 
                     foreach ($fetch_visiblite as $key => $visibilite) {
-                        if ($visibilite['visibilite'] == '0') {
+
                             $datas  = mysqli_fetch_all($req);
+
                             foreach ($datas as $key => $data) {
+
                                 sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 
 
@@ -97,7 +99,7 @@ if (isset($_POST["deconnexion"])) {
                                 echo '</td><td>';
                                 echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
 
-                                if (isset($_SESSION['login']) == 'admin') {
+                                if ($_SESSION['login'] == 'admin') {
                                     echo '</td><td>
                         <form action="#" method="post">
                                     <label for="1">Privée:</label>
@@ -108,7 +110,7 @@ if (isset($_POST["deconnexion"])) {
                                 </form>';
                                 }
                             }
-                        }
+                        
                     }
                     if(isset($_POST['newVisibilite']) && isset($_POST['submit_visibilite'])){
                         echo 'MAJ VISIBILITE';
