@@ -61,7 +61,7 @@ if (isset($_POST["deconnexion"])) {
                         <th>
                             Date de création
                         </th>
-                        <?php if(isset($_SESSION['login']) === 'admin') { ?>
+                        <?php if(isset($_SESSION['login']) == 'admin') { ?>
                             <th>
                                 Visibilité
                             </th>
@@ -84,7 +84,7 @@ if (isset($_POST["deconnexion"])) {
                             $datas  = mysqli_fetch_all($req);
 
                             foreach ($datas as $key => $data) {
-
+                                
                                 sscanf($data[2], "%4s-%2s-%2s %2s:%2s:%2s", $annee, $mois, $jour, $heure, $minute, $seconde);
 
 
@@ -99,7 +99,7 @@ if (isset($_POST["deconnexion"])) {
                                 echo '</td><td>';
                                 echo $jour, '-', $mois, '-', $annee, ' ', $heure, ':', $minute;
 
-                                if ($_SESSION['login'] == 'admin') {
+                                if (isset($_SESSION['login']) == 'admin') {
                                     echo '</td><td>
                         <form action="#" method="post">
                                     <label for="1">Privée:</label>
