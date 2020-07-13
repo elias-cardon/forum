@@ -34,14 +34,14 @@ if (isset($_POST["deconnexion"])) {
     $query = mysqli_query($link, $requete);
     $results = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    if(isset($_GET['id'])){
+    if (isset($_GET['id'])) {
         try {
             $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
         }
         $req = $bdd->prepare("SELECT * FROM messages WHERE id= ?");
-        $req-> execute([$_GET['id']]);
+        $req->execute([$_GET['id']]);
         $post = $req->fetch();
 
     }
@@ -73,7 +73,6 @@ if (isset($_POST["deconnexion"])) {
                 <tr>
 
 
-
                     <?php
                     foreach ($results as $key => $data) {
                         echo '<tr>';
@@ -95,7 +94,7 @@ if (isset($_POST["deconnexion"])) {
                         echo '</td>';
 
                         echo '<td>';
-                        echo  htmlentities(trim($data['date_heure']));
+                        echo htmlentities(trim($data['date_heure']));
                         echo '</td>';
 
                         echo '<td>';
@@ -114,19 +113,19 @@ if (isset($_POST["deconnexion"])) {
     <?php
     mysqli_free_result($query);
     ?>
-    <?php if(isset($_SESSION['login'])){
+    <?php if (isset($_SESSION['login'])) {
 
-        if(isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
 
             //SECURE TITRE
             $titre = htmlspecialchars($_POST['titre']);
 
-            if(!empty($titre)){
+            if (!empty($titre)) {
 
                 //connexion à la bdd
                 try {
                     $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
-                }catch(PDOException $e){
+                } catch (PDOException $e) {
                     echo 'Erreur : ' . $e->getMessage();
                 }
                 $prepare = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = ? ORDER BY ID DESC'); # Pourquoi order si c'est déjà ordonné dans l'index ? Pourquoi demander un login si l'admin est le seul a pouvoir ajouter des catégories.
@@ -141,7 +140,7 @@ if (isset($_POST["deconnexion"])) {
 
                 header("location: message.php?id_categorie=" . $myid);
 
-            }else echo "Veuillez saisir un titre.";
+            } else echo "Veuillez saisir un titre.";
         }
         ?>
 
