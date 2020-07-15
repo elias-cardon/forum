@@ -34,18 +34,64 @@ if (isset($_POST["deconnexion"])) {
         $query = mysqli_query($link, $requete);
         $results = mysqli_fetch_all($query, MYSQLI_ASSOC);
         
-        if(isset($_GET['id'])){
+
+        /***LIKE/DISLIKES ***/
+
+        if(isset($_GET['id']) AND !empty($_GET['id'])){
+            $get_id = htmlentities($_GET['id']);
         try {
             $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
         }catch(PDOException $e){
             echo 'Erreur : ' . $e->getMessage();
         }
         $req = $bdd->prepare("SELECT * FROM messages WHERE id= ?");
-        $req-> execute([$_GET['id']]);
-        $post = $req->fetch();
+        $req-> execute(array($get_id));
+        $results = $req->fetch();
 
+        if($req->rowCount()==1) {
+            $myid = $_GET['id'];
+            $titre = $req['titre'];
+            $contenu = $req['contenu'];
+        } else {
+            die ('Ce message n\'existe pas');
+        }
+
+    try {
+        $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+    }catch(PDOException $e){
+        echo 'Erreur : ' . $e->getMessage();
     }
+    if(isset($_GET['t'],$_GET['id']) AND !empty($_GET['t']) AND !empty($_GET['id'])); {
+        $getid = (int) $_GET['id'];
+        $gett = (int) $_GET['t'];
+        
 
+        $likes = $bdd->prepare('SELECT id FROM likes WHERE id_messages = ?');
+        $likes->execute(array($myid));
+        $likes = $likes->rowCount();
+
+        $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_messages = ?');
+        $dislikes->execute(array($myid));
+        $dislikes = $dislikes->rowCount();
+
+        $requete = $bdd->prepare('SELECT id FROM messages WHERE id = ?');
+        $requete->execute(array($getid));
+
+    if($requete->rowCount()==1) {
+        if($gett ==1) {
+            $ins = $bdd->prepare('INSERT INTO likes (id_messages) VALUES (?)');
+            $ins->execute(array($getid));
+
+        } elseif ($gett ==2) {
+            $ins = $bdd->prepare('INSERT INTO dislikes (id_messages) VALUES (?)');
+            $ins->execute(array($getid));
+            header('location: http://localhost/forum/messages.php?id_categories='.$getid);
+        } else {
+            exit('Erreur <a href="http://localhost/forum/index.php');
+        }
+    }
+}
+}
         ?>
         <div class="center"> 
         <div class="table-center">
@@ -71,8 +117,6 @@ if (isset($_POST["deconnexion"])) {
                     </th>
                 </tr>
                 <tr>
-                
-
 
                 <?php
                 foreach ($results as $key => $data) {
@@ -98,10 +142,12 @@ if (isset($_POST["deconnexion"])) {
                     echo  htmlentities(trim($data['date_heure']));
                     echo '</td>';
 
-                    echo '<td>';
-                    echo '<div class="vote_btn">
-                    <button class="vote_like"><i class="fas fa-thumbs-up"></i> <?=$post->like_count <?</button>
-                    <button class="vote_dislike"><i class="fas fa-thumbs-down"></i> <?=$post->dislike_count <?</button>';
+
+                    echo '<td>'; ?>
+                   <div class="vote_btn"> 
+                    <i class="fas fa-thumbs-up"><a href="messages.php?t=1&id=<?=$myid ?>" class="lien"> J'aime</a></i> (<?= $likes?>)
+                    <i class="fas fa-thumbs-down"><a href="messages.php?t=2&id=<?=$myid ?>" class="lien"> Je n'aime pas</a></i> (<?= $myid?>)
+                    <?php
                     echo '</td>';
 
                     echo '</tr>';
@@ -143,6 +189,8 @@ if(isset($_POST['submit'])){
 
     }else echo "Veuillez saisir un titre.";
 }
+
+
 ?>
 
 <div class="center_form_topic">
