@@ -33,7 +33,7 @@ if (isset($_POST["deconnexion"])) {
 
         $myid = $_GET['id_categorie'];
         $link = mysqli_connect("localhost", "root", "", "forum");
-        $requete = "SELECT topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
+        $requete = "SELECT  topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.id, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
         $query = mysqli_query($link, $requete);
         $results = mysqli_fetch_all($query, MYSQLI_ASSOC);
         
@@ -57,14 +57,6 @@ if (isset($_POST["deconnexion"])) {
             die ('Ce message n\'existe pas');
         }
     }
-        
-        $likes = $bdd->prepare('SELECT id FROM likes WHERE id_messages = ?');
-        $likes->execute(array($myid));
-        $likes = $likes->rowCount();
-
-        $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_messages = ?');
-        $dislikes->execute(array($myid));
-        $dislikes = $dislikes->rowCount();
 
         ?>
         <div class="center"> 
@@ -94,6 +86,13 @@ if (isset($_POST["deconnexion"])) {
 
                 <?php
                 foreach ($results as $key => $data) {
+                    $likes = $bdd->prepare('SELECT id FROM likes WHERE id_messages = ?');
+                    $likes->execute(array($data['id']));
+                    $likes = $likes->rowCount();
+
+                    $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_messages = ?');
+                    $dislikes->execute(array($data['id']));
+                    $dislikes = $dislikes->rowCount();
                     echo '<tr>';
 
                     echo '<td>';
@@ -119,8 +118,8 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '<td>'; ?>
                    <div class="vote_btn"> 
-                    <i class="fas fa-thumbs-up"><a href="message.php?t=1&id_categorie=<?=$myid ?>" class="lien"> J'aime</a></i> (<?= $likes?>)
-                    <i class="fas fa-thumbs-down"><a href="message.php?t=2&id_categorie=<?=$myid ?>" class="lien"> Je n'aime pas</a></i> (<?= $dislikes?>)
+                    <i class="fas fa-thumbs-up"><a href="likes.php?t=1&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> J'aime</a></i> (<?= $likes?>)
+                    <i class="fas fa-thumbs-down"><a href="likes.php?t=2&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> Je n'aime pas</a></i> (<?= $dislikes?>)
                     <?php
                     echo '</td>';
 
