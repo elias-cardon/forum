@@ -25,18 +25,19 @@ if (isset($_POST["deconnexion"])) {
     <main>
 
         <?php
-        $link = mysqli_connect("localhost", "root", "", "forum");
-
+        try {
+            $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
+        }catch(PDOException $e){
+            echo 'Erreur : ' . $e->getMessage();
+        }
 
         $myid = $_GET['id_categorie'];
-
-        $requete = "SELECT topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
+        $link = mysqli_connect("localhost", "root", "", "forum");
+        $requete = "SELECT  topics.titre as topics_titre, categories.titre as categories_titre, utilisateurs.login, messages.id, messages.contenu, messages.date_heure FROM messages INNER JOIN utilisateurs ON(messages.id_utilisateurs=utilisateurs.id) INNER JOIN categories ON (categories.id=id_categorie) INNER JOIN topics ON (categories.id_topics = topics.id) where categories.id=$myid";
         $query = mysqli_query($link, $requete);
         $results = mysqli_fetch_all($query, MYSQLI_ASSOC);
         
-
-        /***LIKE/DISLIKES ***/
-
+        /***LIKES/DISLIKES***/
         if(isset($_GET['id']) AND !empty($_GET['id'])){
             $get_id = htmlentities($_GET['id']);
         try {
@@ -55,43 +56,8 @@ if (isset($_POST["deconnexion"])) {
         } else {
             die ('Ce message n\'existe pas');
         }
-
-    try {
-        $bdd = new PDO("mysql:host=localhost;dbname=forum;charset=utf8", "root", "");
-    }catch(PDOException $e){
-        echo 'Erreur : ' . $e->getMessage();
     }
-    if(isset($_GET['t'],$_GET['id']) AND !empty($_GET['t']) AND !empty($_GET['id'])); {
-        $getid = (int) $_GET['id'];
-        $gett = (int) $_GET['t'];
-        
 
-        $likes = $bdd->prepare('SELECT id FROM likes WHERE id_messages = ?');
-        $likes->execute(array($myid));
-        $likes = $likes->rowCount();
-
-        $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_messages = ?');
-        $dislikes->execute(array($myid));
-        $dislikes = $dislikes->rowCount();
-
-        $requete = $bdd->prepare('SELECT id FROM messages WHERE id = ?');
-        $requete->execute(array($getid));
-
-    if($requete->rowCount()==1) {
-        if($gett ==1) {
-            $ins = $bdd->prepare('INSERT INTO likes (id_messages) VALUES (?)');
-            $ins->execute(array($getid));
-
-        } elseif ($gett ==2) {
-            $ins = $bdd->prepare('INSERT INTO dislikes (id_messages) VALUES (?)');
-            $ins->execute(array($getid));
-            header('location: http://localhost/forum/messages.php?id_categories='.$getid);
-        } else {
-            exit('Erreur <a href="http://localhost/forum/index.php');
-        }
-    }
-}
-}
         ?>
         <div class="center"> 
         <div class="table-center">
@@ -120,6 +86,13 @@ if (isset($_POST["deconnexion"])) {
 
                 <?php
                 foreach ($results as $key => $data) {
+                    $likes = $bdd->prepare('SELECT id FROM likes WHERE id_messages = ?');
+                    $likes->execute(array($data['id']));
+                    $likes = $likes->rowCount();
+
+                    $dislikes = $bdd->prepare('SELECT id FROM dislikes WHERE id_messages = ?');
+                    $dislikes->execute(array($data['id']));
+                    $dislikes = $dislikes->rowCount();
                     echo '<tr>';
 
                     echo '<td>';
@@ -145,8 +118,8 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '<td>'; ?>
                    <div class="vote_btn"> 
-                    <i class="fas fa-thumbs-up"><a href="messages.php?t=1&id=<?=$myid ?>" class="lien"> J'aime</a></i> (<?= $likes?>)
-                    <i class="fas fa-thumbs-down"><a href="messages.php?t=2&id=<?=$myid ?>" class="lien"> Je n'aime pas</a></i> (<?= $myid?>)
+                    <i class="fas fa-thumbs-up"><a href="likes.php?t=1&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> J'aime</a></i> (<?= $likes?>)
+                    <i class="fas fa-thumbs-down"><a href="likes.php?t=2&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> Je n'aime pas</a></i> (<?= $dislikes?>)
                     <?php
                     echo '</td>';
 
