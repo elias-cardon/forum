@@ -13,18 +13,39 @@ if (isset($_GET['t'], $_GET['id']) and !empty($_GET['t']) and !empty($_GET['id']
 
     $requete = $bdd->prepare('SELECT id FROM messages WHERE id_categorie = ?');
     $requete->execute(array($getid));
-
+    var_dump($gett);
     if ($requete->rowCount() > 0) {
-        if ($gett == 1) {var_dump($gett);
-            $ins = $bdd->prepare('INSERT INTO likes (id_messages, id_utilisateurs) VALUES (?, ?)');
-            $ins->execute(array($getIDMessage, $sessionid));
+        if ($gett == 1) {
+            $requestlike = "SELECT * FROM likes WHERE id_messages = ? AND id_utilisateurs = ?" ;
+            $likesTest = $bdd->prepare($requestlike);
+            $likesTest->execute([$getIDMessage, $sessionid]);
+            if($likesTest->rowCount() >= 1) { 
+            $del = $bdd->prepare('DELETE FROM likes WHERE id_messages = ? AND id_utilisateurs = ?');
+            $del->execute(array($getIDMessage,$sessionid));
+            }
+            else{
+                $ins = $bdd->prepare('INSERT INTO likes (id_messages, id_utilisateurs) VALUES (?, ?)');
+                $ins->execute(array($getIDMessage, $sessionid));
+            }
             header('location: http://localhost/forum/message.php?id_categorie=' . $getid);
         } elseif ($gett == 2) {
-            $ins = $bdd->prepare('INSERT INTO dislikes (id_messages, id_utilisateurs) VALUES (?, ?)');
+            $requestlike = "SELECT * FROM dislikes WHERE id_messages = ? AND id_utilisateurs = ?" ;
+            $dislikesTest = $bdd->prepare($requestlike);
+            $dislikesTest->execute([$getIDMessage, $sessionid]);
+            
+            if($dislikesTest->rowCount() >= 1) {
+            $del = $bdd->prepare('DELETE FROM dislikes WHERE id_messages = ? AND id_utilisateurs = ?');
+            $del->execute(array($getIDMessage,$sessionid));
+            }
+            else{
+                $ins = $bdd->prepare('INSERT INTO dislikes (id_messages, id_utilisateurs) VALUES (?, ?)');
             $ins->execute(array($getIDMessage,$sessionid));
+            }
             header('location: http://localhost/forum/message.php?id_categorie=' . $getid);
         } else {
+            var_dump('rrr');
             exit('Erreur <a href="http://localhost/forum/index.php');
         }
     }
 }
+
