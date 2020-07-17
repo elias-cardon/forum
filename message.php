@@ -118,8 +118,8 @@ if (isset($_POST["deconnexion"])) {
 
                     echo '<td>'; ?>
                    <div class="vote_btn"> 
-                    <i class="fas fa-thumbs-up"><a href="likes.php?t=1&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> J'aime</a></i> (<?= $likes?>)
-                    <i class="fas fa-thumbs-down"><a href="likes.php?t=2&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> Je n'aime pas</a></i> (<?= $dislikes?>)
+                    <a href="likes.php?t=1&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> J'aime<i class="fas fa-thumbs-up"></a></i> (<?= $likes?>)
+                    <a href="likes.php?t=2&id_categorie=<?=$myid ?>&id_message=<?= $data['id'] ?>" class="lien"> Je n'aime pas<i class="fas fa-thumbs-down"></a></i> (<?= $dislikes?>)
                     <?php
                     echo '</td>';
 
