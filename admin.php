@@ -18,12 +18,20 @@ if (isset($_POST["deconnexion"])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <link rel="stylesheet" href="src/css/index.css">
 </head>
-<body class="color">
+<body>
 <header>
     <?php include("include/header.php") ?>
 </header>
 <main>
-    <h1 class="title"> Bienvenue Admin ! </h1>
+    <?php
+    if ($_SESSION['login']) {
+        echo "<p>Bienvenue ".$_SESSION['login']. " ! <br/><br/>";
+    }
+    else
+    {
+        header("Location:connexion.php");
+    }
+    ?>
 </main>
 <footer>
     <?php include("include/footer.php") ?>
