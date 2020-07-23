@@ -6,6 +6,10 @@ if (isset($_POST["deconnexion"])) {
     session_destroy();
     header('Location:index.php');
 }
+
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=forum', 'root','');
+
+$membres = $bdd->query('SELECT * FROM membres');
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,15 +27,11 @@ if (isset($_POST["deconnexion"])) {
     <?php include("include/header.php") ?>
 </header>
 <main>
-    <?php
-    if ($_SESSION['login']) {
-        echo "<p>Bienvenue ".$_SESSION['login']. " ! <br/><br/>";
-    }
-    else
-    {
-        header("Location:connexion.php");
-    }
-    ?>
+    <ul>
+        <?php while($m = $membres->fetch()) { ?>
+        <li><?= $m['id'] ?> : <?= $m['login'] ?></li>
+    <?php } ?>
+    </ul>
 </main>
 <footer>
     <?php include("include/footer.php") ?>
