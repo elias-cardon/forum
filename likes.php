@@ -43,7 +43,6 @@ if (isset($_GET['t'], $_GET['id']) and !empty($_GET['t']) and !empty($_GET['id']
             }
             header('location: http://localhost/forum/message.php?id_categorie=' . $getid);
         } else {
-            var_dump('rrr');
             exit('Erreur <a href="http://localhost/forum/index.php');
         }
     }
